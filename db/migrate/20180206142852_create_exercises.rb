@@ -4,6 +4,7 @@ class CreateExercises < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :muscle_group
       t.string :equipment
+      t.string :description
 
       t.timestamps
     end
