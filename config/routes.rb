@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   root to: 'static#home'
   resources :users, :exercises, :workout_exercises, :workouts
 
-
+  #want to name users new differently
 end
