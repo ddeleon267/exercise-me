@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :users, :exercises, :workout_exercises, :workouts
 
   #want to name users new differently
+  ##need sessions controller or nah?
 end
