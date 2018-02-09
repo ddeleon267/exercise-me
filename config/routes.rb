@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   root to: 'static#home'
   resources :users, :exercises, :workout_exercises, :workouts
 
+  get "/signin", to: "sessions#new"
+  # post "/sessions/create", to: "sessions#create"
+  # delete "/signout", to: "sessions#destroy"
+
   #want to name users new differently
   ##need sessions controller or nah?
 end
