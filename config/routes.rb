@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :users, :exercises, :workout_exercises, :workouts
 
   get "/signin", to: "sessions#new"
+  get "/signup", to: "users#new"
   # post "/sessions/create", to: "sessions#create"
   # delete "/signout", to: "sessions#destroy"
 
