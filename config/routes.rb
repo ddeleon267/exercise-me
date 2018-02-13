@@ -9,8 +9,12 @@ Rails.application.routes.draw do
   get "/signup", to: "users#new"
 
   get "/home", to: "users#home"
-  # post "/sessions/create", to: "sessions#create"
-  # delete "/signout", to: "sessions#destroy"
+
+  #login route
+  post "/signin", to: "sessions#create"
+
+  #signout route
+  delete "/signout", to: "sessions#destroy"
 
   #want to name users new differently
   ##need sessions controller or nah?
