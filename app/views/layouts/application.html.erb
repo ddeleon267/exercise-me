@@ -9,6 +9,14 @@
   </head>
 
   <body>
+
+    <%= link_to "Home", home_path %>
+    <%= link_to "Add a New Exercise", new_exercise_path %>
+    <%= link_to "View all Exercises", exercises_path %>
+    <%= link_to "Add a New Workout", new_workout_path %>
+    <%= link_to "View all Workouts", workouts_path %>
+    <%= link_to "View Profile" %>
+    <%= link_to "Log Out", signout_path %>
     <%= yield %>
   </body>
 </html>
