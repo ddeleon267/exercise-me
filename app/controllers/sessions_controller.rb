@@ -2,7 +2,7 @@ class SessionsController < ApplicationController
 
   def new
     @user = User.new
-    #rendersview implicityly bc shares the same name. will have to add more here if that changes
+    #rendersview implicity bc shares the same name. will have to add more here if that changes
   end
 
   def create

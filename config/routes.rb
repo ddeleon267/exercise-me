@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   #login route
   post "/signin", to: "sessions#create"
 
-  post "/signout", to: "sessions#destroy"
+  delete "/signout", to: "sessions#destroy"
 
   #want to name users new differently
   ##need sessions controller or nah?
