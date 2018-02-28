@@ -9,15 +9,23 @@
   </head>
 
   <body>
+    <div>
+      <% if session[:user_id] %>
+        <%= link_to "Home", home_path %>
+        <%= link_to "Add a New Exercise", new_exercise_path %>
+        <%= link_to "View all Exercises", exercises_path %>
+        <%= link_to "Add a New Workout", new_workout_path %>
+        <%= link_to "View all Workouts", workouts_path %>
+        <%= link_to "View Profile", user_path(session[:user_id]) %>
+        <%= link_to "Log out", signout_path, method: :delete %>
+      <% end %>
 
-    <%= link_to "Home", home_path %>
-    <%= link_to "Add a New Exercise", new_exercise_path %>
-    <%= link_to "View all Exercises", exercises_path %>
-    <%= link_to "Add a New Workout", new_workout_path %>
-    <%= link_to "View all Workouts", workouts_path %>
-    <%= link_to "View Profile" %>
-    <%= link_to "Log in", signin_path %>
-    <%= link_to "Log out", signout_path, method: :delete %>
+      <!-- <%= link_to "Log in", signin_path %> -->
+
+    </div>
+    <br>
+
     <%= yield %>
+
   </body>
 </html>

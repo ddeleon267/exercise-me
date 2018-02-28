@@ -1,1 +1,24 @@
 NEW WORKOUT YALL
+
+<h3>Add a Workout</h3>
+
+<%= form_for(@workout) do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <br>
+  <%= f.label "Notes:" %>
+  <br>
+  <%= f.text_area :notes %>
+  <br>
+
+  <%= f.label "Date:" %>
+  <br>
+  <%= f.text_field :date %>
+  <br>
+
+  <%= f.submit %>
+<% end %>

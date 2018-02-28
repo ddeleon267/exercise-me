@@ -1,1 +1,6 @@
 workout index page
+<% Workout.all.each do |w| %>
+  <%= w.name %>
+  <%= w.description %>
+  <%= w.notes %>
+<% end %>
