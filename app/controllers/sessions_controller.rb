@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end
 
   def create
-    
+
       @user = User.find_by(username: params[:user][:username])
       if @user && @user.authenticate(params[:user][:password])
 
@@ -21,11 +21,5 @@ class SessionsController < ApplicationController
     session.delete :user_id
     redirect_to root_url
   end
-
-  # private
-  #
-  # def user_params
-  #   params.require(:user).permit(:username, :email, :password)
-  # end
 
 end
