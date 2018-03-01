@@ -1,6 +1,6 @@
 class Exercise < ApplicationRecord
   #what attributes to i want to have? need to add validations as appropriate
-  validates_presence_of :name, :muscle_group, :email
+  validates_presence_of :name, :muscle_group
   validates :name, uniqueness: true
 
 

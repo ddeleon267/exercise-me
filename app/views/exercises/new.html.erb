@@ -1,16 +1,16 @@
 <h3>Add an Exercise</h3>
 
 <%= form_for(@exercise) do |f| %>
-  <label>Exercise:</label><br>
+  <%= f.label :name %>
   <%= f.text_field :name %><br>
 
-  <label>Muscle Group:</label><br>
+  <%= f.label :muscle_group %>
   <%= f.text_field :muscle_group %><br>
 
-  <label>Equipment Needed:</label><br>
+  <%= f.label :equipment %>
   <%= f.text_field :equipment %><br>
 
-  <label>Description:</label><br>
+  <%= f.label :description %>
   <%= f.text_field :description %><br>
 
   <%= f.submit %>
