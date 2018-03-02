@@ -25,8 +25,11 @@ class ExercisesController < ApplicationController
   end
 
   def edit
-
+    @exercise = Exercise.find(params[:id])
+    ## doesn't update yet bro
   end
+
+  ## should users be able to delete exercises?? unsure
 
     private
 

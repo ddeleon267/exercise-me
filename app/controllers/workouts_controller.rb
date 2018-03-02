@@ -4,7 +4,10 @@ class WorkoutsController < ApplicationController
   end
 
   def create
-    @workout = Workout.create(workout_params)
+    @workout = Workout.new(workout_params)
+    @workout.user_id = current_user.id
+    @workout.save
+    @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
   end
 
   def new
@@ -20,6 +23,6 @@ class WorkoutsController < ApplicationController
   end
 
   def workout_params
-    params.require(:workout).permit(:name, :description, :notes, :date, :user_id)
+    params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[])
   end
 end

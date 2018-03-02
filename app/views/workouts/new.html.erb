@@ -7,11 +7,18 @@ NEW WORKOUT YALL
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>
+
+  <ul><%= f.label :exercises %>
+  <%= f.collection_check_boxes :exercise_ids, Exercise.all, :id, :name %>
+  </ul>
+
   <%= f.label :description %>
   <%= f.text_field :description %>
   <br>
+  <br>
   <%= f.label "Notes:" %>
   <%= f.text_area :notes %>
+  <br>
   <br>
   <%= f.label "Date:" %>
   <%= f.text_field :date %>
