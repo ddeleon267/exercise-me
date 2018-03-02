@@ -1,1 +1,19 @@
 exercise edit page
+
+<h3>Edit This Exercise</h3>
+
+<%= form_for(@exercise) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+
+  <%= f.label :muscle_group %>
+  <%= f.text_field :muscle_group %><br>
+
+  <%= f.label :equipment %>
+  <%= f.text_field :equipment %><br>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %><br>
+
+  <%= f.submit %>
+<% end %>
