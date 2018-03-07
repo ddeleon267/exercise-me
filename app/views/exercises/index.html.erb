@@ -1,9 +1,9 @@
 exercise index page
 
-<% @exercises.each do |w| %>
-  <ul> <%= w.name %>
-    <li><%= w.muscle_group %></li>
-    <li><%= w.equipment %></li>
-    <li><%= w.description %></li>
+<% @exercises.each do |e| %>
+  <ul> <%= link_to "#{e.name}", exercise_path(e) %>
+    <li><%= e.muscle_group %></li>
+    <li><%= e.equipment %></li>
+    <li><%= e.description %></li>
   </ul>
 <% end %>
