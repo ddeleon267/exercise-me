@@ -26,7 +26,11 @@ class ExercisesController < ApplicationController
 
   def edit
     @exercise = Exercise.find(params[:id])
-    ## doesn't update yet bro
+  end
+
+  def update
+    @exercise = Exercise.find(params[:id])
+    @exercise.update(exercise_params) ? (redirect_to exercise_path(@exercise)) : (render :edit)
   end
 
   ## should users be able to delete exercises?? unsure
