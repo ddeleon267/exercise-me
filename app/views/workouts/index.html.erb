@@ -1,6 +1,8 @@
 workout index page
-<% Workout.all.each do |w| %>
-  <%= w.name %>
-  <%= w.description %>
-  <%= w.notes %>
+<ul><% @workouts.each do |w| %>
+<br>
+  <li><%= w.name %></li>
+  <li><%= w.description %></li>
+  <li><%= w.notes %></li>
 <% end %>
+</ul>

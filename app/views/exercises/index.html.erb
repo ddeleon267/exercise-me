@@ -1,5 +1,3 @@
-exercise index page
-
 <% @exercises.each do |e| %>
   <ul> <%= link_to "#{e.name}", exercise_path(e) %>
     <li><%= e.muscle_group %></li>

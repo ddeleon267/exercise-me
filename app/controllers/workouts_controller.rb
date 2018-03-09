@@ -1,6 +1,10 @@
 class WorkoutsController < ApplicationController
   def index
+    @workouts = Workout.all
+  end
 
+  def new
+    @workout = Workout.new
   end
 
   def create
@@ -10,16 +14,17 @@ class WorkoutsController < ApplicationController
     @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
   end
 
-  def new
-    @workout = Workout.new
-  end
-
   def show
     @workout = Workout.find(params[:id])
   end
 
   def edit
- #why can't i get this to run?? <3
+    @workout = Workout.find(params[:id])
+  end
+
+  def update
+    @workout = Workout.find(params[:id])
+    @workout.update(workout_params) ? (redirect_to workout_path(@workout)) : (render :edit)
   end
 
   def workout_params
