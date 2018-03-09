@@ -4,5 +4,12 @@ workout index page
   <li><%= w.name %></li>
   <li><%= w.description %></li>
   <li><%= w.notes %></li>
+  <li><%=
+  ##w.date
+  ## would make life easier to change the data type or the
+  # date to a string, tell users to enter in a proper format, and
+  #then use a regex to vaidate that format. dan offered to help with the regex 
+  %></li>
+
 <% end %>
 </ul>
