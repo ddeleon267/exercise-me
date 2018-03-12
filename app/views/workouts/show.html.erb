@@ -1,5 +1,5 @@
-workout show page
 <h1><%= @workout.name %></h1>
 <p><%= @workout.description %></p>
 <p><%= @workout.notes %></p>
 <p><%= @workout.date %></p>
+<p><%= link_to "Edit This Workout", edit_workout_path(@workout) if @current_user.id == @workout.user.id %><p>
