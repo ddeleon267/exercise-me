@@ -2,7 +2,7 @@ class WorkoutsController < ApplicationController
   #should do a before_action here
 
   def index
-    @workouts = Workout.all
+    @workouts = current_user.workouts
   end
 
   def new
