@@ -1,1 +1,14 @@
-DIS DA USER PROFILE PAGE YOOOOOO
+<h1><%= @user.username %></h1>
+<h3><%= @user.username %>'s Workouts </h3>
+
+<% if @user_workouts.empty? %>
+  <p> <%= @user.username %> has not added any workouts yet!<p>
+<% else %>
+  <% @user_workouts.reverse.each do |workout| %>
+    <ul><%= link_to workout.name, workout_path(workout) %></a>
+        <% workout.exercises.each do |exercise| %>
+          <li><%= exercise.name %></li>
+        <% end %>
+    </ul>
+  <% end %>
+<% end %>

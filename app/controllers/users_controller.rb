@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @user_workouts = @user.workouts
   end
 
   def home
