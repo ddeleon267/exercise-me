@@ -1,7 +1,35 @@
-Home page of <%= @user.username %>
+<h1>Welcome, <%= @user.username %></h1>
 
 
-wut do i want on this home page??
+<h3>Recently Added Workouts From the Community</h3>
+<% if !@workouts.empty? %>
+  <% @workouts.reverse.take(5).each do |workout| %>
+    <% user = (@current_user.id == workout.user_id) ? "you" : workout.user.username %>
+      <ul><%= link_to workout.name, workout_path(workout) %>
+        <li>Added by <%= link_to workout.user.username, user_path(workout.user) %></li>
+      </ul>
+  <% end %>
+<% end %>
+
+<br><br>
+
+<h3>Recently Added Exercises</h3>
+  <% if !@exercises.empty? %>
+    <ul>
+      <% @exercises.reverse.take(10).each do |exercise| %>
+        <li><%= link_to exercise.name, exercise_path(exercise) %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+<h3>Explore New Users!</h3>
+  <% if !@users.empty? %>
+    <ul>
+      <% @users.reverse.take(10).each do |user| %>
+        <li><%= link_to user.username, user_path(user) %></a></li>
+      <% end %>
+    </ul>
+  <% end %>
 
 <!-- # <%= form_tag ({controller: 'sessions', action: 'destroy', method: 'post'}) do %>
 #   <input type=submit value='logout'>

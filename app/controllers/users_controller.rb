@@ -10,6 +10,9 @@ class UsersController < ApplicationController
 
   def home
     @user = current_user
+    @workouts = Workout.all
+    @exercises = Exercise.all
+    @users = User.all
   end
 
   def create
