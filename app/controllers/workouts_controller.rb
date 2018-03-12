@@ -1,4 +1,6 @@
 class WorkoutsController < ApplicationController
+  #should do a before_action here
+
   def index
     @workouts = Workout.all
   end
@@ -31,4 +33,5 @@ class WorkoutsController < ApplicationController
   def workout_params
     params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[])
   end
+
 end

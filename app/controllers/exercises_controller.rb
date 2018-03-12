@@ -1,5 +1,6 @@
 class ExercisesController < ApplicationController
-
+  #should refactor with a before_action
+  
   def index
     @exercises = Exercise.all
   end
@@ -10,14 +11,7 @@ class ExercisesController < ApplicationController
 
   def create
     @exercise = Exercise.new(exercise_params)
-    # binding.pry
     @exercise.save ? (redirect_to exercise_path(@exercise)) : (render :new)
-    # if @exercise.save
-    # # binding.pry
-    #   redirect_to exercise_path(@exercise)
-    # else
-    #
-    # end
   end
 
   def show
