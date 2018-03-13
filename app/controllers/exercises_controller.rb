@@ -1,6 +1,6 @@
 class ExercisesController < ApplicationController
-  #should refactor with a before_action
-  
+  before_action :set_exercise, only: [:show, :edit, :update]
+
   def index
     @exercises = Exercise.all
   end
@@ -15,23 +15,24 @@ class ExercisesController < ApplicationController
   end
 
   def show
-    @exercise = Exercise.find(params[:id])
   end
 
   def edit
-    @exercise = Exercise.find(params[:id])
   end
 
   def update
-    @exercise = Exercise.find(params[:id])
     @exercise.update(exercise_params) ? (redirect_to exercise_path(@exercise)) : (render :edit)
   end
 
   ## should users be able to delete exercises?? unsure
 
-    private
+  private
 
-    def exercise_params
-  		params.require(:exercise).permit(:name, :muscle_group, :equipment, :description)
-  	end
+  def exercise_params
+  	params.require(:exercise).permit(:name, :muscle_group, :equipment, :description)
+  end
+
+  def set_exercise
+    @exercise = Exercise.find(params[:id])
+  end
 end

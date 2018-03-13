@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  #should do a before_action here
+  before_action :set_workout, only: [:show, :edit, :update]
 
   def index
     @workouts = current_user.workouts
@@ -12,26 +12,28 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.new(workout_params)
     @workout.user_id = current_user.id
-    @workout.save
     @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
   end
 
   def show
-    @workout = Workout.find(params[:id])
     @current_user = current_user
   end
 
   def edit
-    @workout = Workout.find(params[:id])
   end
 
   def update
-    @workout = Workout.find(params[:id])
     @workout.update(workout_params) ? (redirect_to workout_path(@workout)) : (render :edit)
   end
 
+  private
+
   def workout_params
     params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[])
+  end
+
+  def set_workout
+    @workout = Workout.find(params[:id])
   end
 
 end
