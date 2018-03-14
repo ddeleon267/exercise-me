@@ -5,4 +5,11 @@ class Workout < ApplicationRecord
   has_many :exercises, through: :workout_exercises
 
   validates_presence_of :name
+
+  def exercises_attributes=(attributes)
+    attributes.values.each do |attribute|
+      exercise = Exercise.find_or_create_by(attribute)
+      self.workout_exercises.build(exercise: exercise)
+    end
+  end
 end
