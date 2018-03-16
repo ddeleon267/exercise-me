@@ -13,6 +13,5 @@ class ApplicationController < ActionController::Base
   def require_logged_in
     redirect_to controller: 'sessions', action: 'new' unless current_user
   end
-
   ##am i using this method anywhere??
 end

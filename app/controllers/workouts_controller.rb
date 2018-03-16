@@ -7,6 +7,7 @@ class WorkoutsController < ApplicationController
 
   def new
     @workout = Workout.new
+    @exercises = @workout.exercises.build
   end
 
   def create
