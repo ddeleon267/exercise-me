@@ -13,7 +13,7 @@ class WorkoutsController < ApplicationController
   def create
     @workout = Workout.new(workout_params)
     @workout.user_id = current_user.id
-    binding.pry
+
     @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
   end
 
