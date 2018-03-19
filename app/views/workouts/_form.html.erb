@@ -1,0 +1,49 @@
+<%= form_for(@workout) do |f| %>
+  <% if @workout.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@workout.errors.count, "error") %> prohibited this workout from being edited:
+      </h2>
+
+      <ul>
+      <% @workout.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+
+  <h3>Exercises</h3>
+  <h4>Choose from Existing Exercises</h4>
+  <ul><%= f.label :exercises %>
+  <%= f.collection_check_boxes :exercise_ids, Exercise.all, :id, :name %>
+  </ul>
+
+  <h4>Add a New Exercise</h4>
+  <%= f.fields_for :exercises, @workout.exercises.build do |exercises_fields| %>
+    Exercise Name: <%= exercises_fields.text_field :name %>
+    Muscle Group: <%= exercises_fields.text_field :muscle_group %>
+  <% end %>
+  <br>
+  <br>
+  <br>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+  <br>
+  <br>
+  <%= f.label "Notes:" %>
+  <%= f.text_area :notes %>
+  <br>
+  <br>
+  <%= f.label "Date:" %>
+  <%= f.text_field :date %>
+  <br>
+
+  <br>
+  <br>
+  <%= f.submit %>
+<% end %>
