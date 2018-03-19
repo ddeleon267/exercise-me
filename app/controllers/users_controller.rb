@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  #could do a before_action here, if i decide to add additional actions here; e.g. edit/update/delete
+  #could do a before_action here, if i decide to add additional actions here; e.g. edit/update/delete. unsure.
+
   def new
     @user = User.new
   end
