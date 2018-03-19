@@ -16,8 +16,6 @@ class Workout < ApplicationRecord
       self.exercises.build(attributes)
       self.exercises.reject { |exercise| exercise.destroy if exercise.name.blank? || exercise.muscle_group.blank?  }
     end
-
-
   end
 
 end
