@@ -1,6 +1,6 @@
 <h1>Your Workouts</h1>
 <% @workouts.each do |w| %>
-  <ul><%=link_to w.name, workout_path(w) %></li>
+  <ul><%=link_to w.name, workout_path(w) %>- <%= last_updated w %></li>
   <li><%= w.description %></li>
   <li><%= w.notes %></li>
   <!-- <li><%=
