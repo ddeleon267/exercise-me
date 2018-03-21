@@ -21,8 +21,16 @@ class WorkoutsController < ApplicationController
   end
 
   def new
-    @workout = Workout.new
-    @exercises = @workout.exercises.build
+    # @workout = Workout.new
+    # @workout = Workout.new(user_id: params[:user_id])
+    # @exercises = @workout.exercises.build
+
+    if params[:user_id] && !User.exists?(params[:user_id])
+      redirect_to new_workout_path #need alert that user was not found
+    else
+      @workout = Workout.new(user_id: params[:user_id])
+      @exercises = @workout.exercises.build
+    end
   end
 
   def create
