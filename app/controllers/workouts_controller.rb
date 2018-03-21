@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  before_action :set_workout, only: [:show, :edit, :update]
+  before_action :set_workout, only: [:edit, :update]
 
   def index
     # @workouts = Workout.all
@@ -11,7 +11,7 @@ class WorkoutsController < ApplicationController
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
       if @user.nil?
-        redirect_to home_path, alert: "Artist not found"
+        redirect_to home_path #need some kind of alert / flash msg
       else
         @workouts = User.find(params[:user_id]).workouts
       end
@@ -35,6 +35,18 @@ class WorkoutsController < ApplicationController
   def show
     @current_user = current_user
     #do i need to modify this some way bc of the nested resource???
+    if params[:user_id]
+      @user = User.find_by(id: params[:user_id])
+      @workout = @user.workouts.find_by(id: params[:id]) if @user
+
+      if @workout.nil? && @user
+        redirect_to user_workouts_path(@user) #need alert
+      else
+        set_workout #need alert
+      end
+    else
+      set_workout
+    end
   end
 
   def edit
