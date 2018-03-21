@@ -3,8 +3,13 @@ class User < ApplicationRecord
   has_many :workouts
 
   validates_presence_of :username, :password, :email
-  validates :username, uniqueness: true
+  validates :username, length: { minimum: 3 }, uniqueness: { case_sensitive: false }
+  validates :email, uniqueness: true
   validates :password, length: { minimum: 6 }
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+  #validates :password, confirmation: true
 
+  #maybe don't use this???
+  # validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
+
+  #probably will need method to handle omniauth here
 end

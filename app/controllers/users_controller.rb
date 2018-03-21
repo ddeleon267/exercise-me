@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   #could do a before_action here, if i decide to add additional actions here; e.g. edit/update/delete. unsure.
 
   def new
+    #redirect_if_logged_in
     @user = User.new
   end
 
@@ -27,7 +28,14 @@ class UsersController < ApplicationController
     else
       render :new
     end
+
+    #could choose to do it this way. idk if i like it tho; not so readable
+    # @user.save ? (session[:user_id] = @user.id; redirect_to home_path ) : (render :new)
   end
+
+  #could allow user to edit/update profile, would need form for that
+
+  #could allow user to destroy profile
 
   private
 
