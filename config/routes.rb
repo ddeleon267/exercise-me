@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   root to: 'static#index'
 
   resources :users do
-    resources :workouts, only: [:index, :show]
+    resources :workouts, only: [:index, :show, :new]
   end
 
   resources :exercises, :workout_exercises, :workouts #prolly don't need all this

@@ -2,7 +2,10 @@ class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update]
 
   def index
-    @workouts = current_user.workouts
+    @workouts = Workout.all
+    # @workouts = current_user.workouts
+    #do i need to modify this some way bc of the nested resource???
+    #so this works if i
   end
 
   def new
@@ -19,6 +22,7 @@ class WorkoutsController < ApplicationController
 
   def show
     @current_user = current_user
+    #do i need to modify this some way bc of the nested resource???
   end
 
   def edit

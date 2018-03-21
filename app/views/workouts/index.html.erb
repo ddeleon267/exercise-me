@@ -3,6 +3,7 @@
   <ul><%=link_to w.name, workout_path(w) %>- <%= last_updated w %></li>
   <li><%= w.description %></li>
   <li><%= w.notes %></li>
+  <li><%= w.user.username %></li>
   <!-- <li><%=
   ##w.date
   ## would make life easier to change the data type or the
