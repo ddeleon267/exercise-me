@@ -9,7 +9,12 @@ class WorkoutsController < ApplicationController
     #so this works if i
     # binding.pry
     if params[:user_id]
-      @workouts = User.find(params[:user_id]).workouts
+      @user = User.find_by(id: params[:user_id])
+      if @user.nil?
+        redirect_to home_path, alert: "Artist not found"
+      else
+        @workouts = User.find(params[:user_id]).workouts
+      end
     else
       @workouts = Workout.all
     end
