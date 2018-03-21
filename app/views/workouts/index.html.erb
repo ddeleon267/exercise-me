@@ -1,14 +1,19 @@
 <h1>Your Workouts</h1>
-<% @workouts.each do |w| %>
-  <ul><%=link_to w.name, workout_path(w) %>- <%= last_updated w %></li>
-  <li><%= w.description %></li>
-  <li><%= w.notes %></li>
-  <li><%= w.user.username %></li>
-  <!-- <li><%=
-  ##w.date
-  ## would make life easier to change the data type or the
-  # date to a string, tell users to enter in a proper format, and
-  #then use a regex to vaidate that format. dan offered to help with the regex
-  %></li> -->
-</ul>
+
+<% if @workouts.empty? %>
+  <p>No workouts have been added by this user.<p>
+<% else %>
+  <% @workouts.each do |w| %>
+    <ul><%=link_to w.name, workout_path(w) %>- <%= last_updated w %></li>
+    <li><%= w.description %></li>
+    <li><%= w.notes %></li>
+    <li><%= w.user.username %></li>
+    <!-- <li><%=
+    ##w.date
+    ## would make life easier to change the data type or the
+    # date to a string, tell users to enter in a proper format, and
+    #then use a regex to vaidate that format. dan offered to help with the regex
+    %></li> -->
+    </ul>
+  <% end %>
 <% end %>

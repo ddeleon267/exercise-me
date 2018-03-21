@@ -2,10 +2,17 @@ class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:show, :edit, :update]
 
   def index
-    @workouts = Workout.all
+    # @workouts = Workout.all
+    # @workouts = Workout.where("user_id = ?", current_user.id)
     # @workouts = current_user.workouts
     #do i need to modify this some way bc of the nested resource???
     #so this works if i
+    # binding.pry
+    if params[:user_id]
+      @workouts = User.find(params[:user_id]).workouts
+    else
+      @workouts = Workout.all
+    end
   end
 
   def new
