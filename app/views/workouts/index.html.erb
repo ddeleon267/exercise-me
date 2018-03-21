@@ -1,4 +1,4 @@
-<h1>Your Workouts</h1>
+<h1>Workouts</h1>
 
 <% if @workouts.empty? %>
   <p>No workouts have been added by this user.<p>
@@ -7,7 +7,7 @@
     <ul><%=link_to w.name, workout_path(w) %>- <%= last_updated w %></li>
     <li><%= w.description %></li>
     <li><%= w.notes %></li>
-    <li><%= w.user.username %></li>
+    <li><%= link_to w.user.username, user_workouts_path(w.user) %></li>
     <!-- <li><%=
     ##w.date
     ## would make life easier to change the data type or the
