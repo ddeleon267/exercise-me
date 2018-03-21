@@ -1,5 +1,5 @@
 <h1><%= @workout.name %></h1>
-<p> Added by: <%= @workout.user.username %></p>
+<p> Added by: <%= link_to @workout.user.username, user_path(@workout.user) if @workout.user %></p>
 <p><%= last_updated @workout %></p>
 <p><%= @workout.description %></p>
 <p><%= @workout.notes %></p>
@@ -7,4 +7,4 @@
 <p><% @workout.exercises.each do |exercise| %></p>
 <%= exercise.name %>
 <% end %>
-<p><%= link_to "Edit This Workout", edit_workout_path(@workout) if @current_user.id == @workout.user.id %><p>
+<p><%= link_to "Edit This Workout", edit_user_workout_path(@workout.user, @workout) if @workout.user && @current_user.id == @workout.user.id %><p>

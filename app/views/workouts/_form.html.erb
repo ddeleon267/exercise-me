@@ -1,6 +1,12 @@
 <%= form_for(@workout) do |f| %>
   <%= render partial: "layouts/errors", locals: { object: @workout } %>
 
+  <%= user_id_field(@workout) %>
+  <br>
+  <%= f.hidden_field :user_id %>
+
+
+
   <%= f.label :name %>
   <%= f.text_field :name %>
   <br>

@@ -1,5 +1,5 @@
 class WorkoutsController < ApplicationController
-  before_action :set_workout, only: [:edit, :update]
+  before_action :set_workout, only: [:update]
 
   def index
     # @workouts = Workout.all
@@ -58,6 +58,17 @@ class WorkoutsController < ApplicationController
   end
 
   def edit
+    if params[:user_id]
+      user = User.find_by(id: params[:user_id])
+      if user.nil?
+        redirect_to home_path #need alert and might choose to redirect elsewhere
+      else
+        @workout = user.workouts.find_by(id: params[:id])
+        redirect_to user_workouts_path(user) if @workout.nil? #need alert
+      end
+    else
+      set_workout
+    end
   end
 
   def update
