@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   #could do a before_action here, if i decide to add additional actions here; e.g. edit/update/delete. unsure.
+  before_action :require_logged_in, except: [:new, :create]
 
   def new
     #redirect_if_logged_in
@@ -9,7 +10,7 @@ class UsersController < ApplicationController
   def show
     # @user = current_user
     @user = User.find(params[:id])
-    @user_workouts = @user.workouts
+    @user_workouts = @user.workouts #maybe this should bein the model?
   end
 
   def home

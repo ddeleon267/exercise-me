@@ -1,5 +1,6 @@
 class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update]
+  before_action :require_logged_in
 
   def index
     @exercises = Exercise.all

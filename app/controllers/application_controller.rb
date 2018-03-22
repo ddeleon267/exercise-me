@@ -8,10 +8,12 @@ class ApplicationController < ActionController::Base
     # User.find(session[:user_id])
   end
 
-  private
+  def logged_in?
+    !!current_user
+  end
 
   def require_logged_in
-    redirect_to controller: 'sessions', action: 'new' unless current_user
+    redirect_to controller: 'sessions', action: 'new' unless logged_in?
   end
   ##am i using this method anywhere??
 end

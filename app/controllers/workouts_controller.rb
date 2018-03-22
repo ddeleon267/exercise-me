@@ -1,5 +1,6 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:update]
+  before_action :require_logged_in
 
   def index
     # @workouts = Workout.all
