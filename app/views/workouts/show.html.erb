@@ -7,4 +7,5 @@
 <p><% @workout.exercises.each do |exercise| %></p>
 <%= exercise.name %>
 <% end %>
+
 <p><%= link_to "Edit This Workout", edit_user_workout_path(@workout.user, @workout) if @workout.user && @current_user.id == @workout.user.id %><p>

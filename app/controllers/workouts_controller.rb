@@ -1,6 +1,7 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:update]
   before_action :require_logged_in
+  before_action :redirect_if_unauthorized, only: [:new, :create, :edit, :update]
 
   def index
     # @workouts = Workout.all
