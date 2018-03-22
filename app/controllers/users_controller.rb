@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   #could do a before_action here, if i decide to add additional actions here; e.g. edit/update/delete. unsure.
   before_action :require_logged_in, except: [:new, :create]
+  before_action :redirect_if_logged_in, except: [:show, :home]
 
   def new
     #redirect_if_logged_in

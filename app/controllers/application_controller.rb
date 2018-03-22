@@ -14,11 +14,12 @@ class ApplicationController < ActionController::Base
 
   def require_logged_in
     redirect_to controller: 'sessions', action: 'new' unless logged_in?
+    # redirect_to new_session_path unless logged_in?
   end
 
   def redirect_if_logged_in
     redirect_to controller: 'users', action: 'home' if logged_in?
-    # redirect_to root_path if logged_in?
+    # redirect_to home_path if logged_in?
   end
   ##am i using this method anywhere??
 end

@@ -18,6 +18,7 @@ class ExercisesController < ApplicationController
   def show
   end
 
+  #do i want users to be able to edit exercises?
   def edit
   end
 
