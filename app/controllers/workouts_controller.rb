@@ -91,6 +91,7 @@ class WorkoutsController < ApplicationController
   end
 
   def set_workout
+
     @workout = Workout.find(params[:id])
   end
 
