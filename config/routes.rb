@@ -11,14 +11,14 @@ Rails.application.routes.draw do
   resources :exercises, :workout_exercises, :workouts #prolly don't need all this
   #took out users
 
-  get "/signin", to: "sessions#new"
+  get "/login", to: "sessions#new"
   get "/signup", to: "users#new"
 
   get "/home", to: "users#home"
 
   #login route
-  post "/signin", to: "sessions#create"
-  delete "/signout", to: "sessions#destroy"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
 
   #want to name users new differently
   ##need sessions controller or nah?
