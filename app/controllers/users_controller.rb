@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   #could do a before_action here, if i decide to add additional actions here; e.g. edit/update/delete. unsure.
+  before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_logged_in, except: [:new, :create]
-  before_action :redirect_if_logged_in, except: [:show, :home]
+  before_action :redirect_if_logged_in, except: [:show, :home, :edit, :update]
 
   def new
     #redirect_if_logged_in
@@ -10,7 +11,6 @@ class UsersController < ApplicationController
 
   def show
     # @user = current_user
-    @user = User.find(params[:id])
     @user_workouts = @user.workouts #maybe this should bein the model?
   end
 
@@ -35,7 +35,14 @@ class UsersController < ApplicationController
     # @user.save ? (session[:user_id] = @user.id; redirect_to home_path ) : (render :new)
   end
 
-  #could allow user to edit/update profile, would need form for that
+  def edit
+    #do i need to do something extra to protect against unauth users?
+  end
+
+  def update
+    #this is not updating because of passwork validations
+    @user.update(user_params) ? (redirect_to home_path) : (render :edit)
+  end
 
   #could allow user to destroy profile
 
@@ -45,4 +52,7 @@ class UsersController < ApplicationController
     params.require(:user).permit(:username, :email, :password)
   end
 
+  def set_user
+    @user = User.find(params[:id])
+  end
 end
