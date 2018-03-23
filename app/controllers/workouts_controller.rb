@@ -1,7 +1,7 @@
 class WorkoutsController < ApplicationController
-  before_action :set_workout, only: [:update, :delete]
+  before_action :set_workout, only: [:update, :destroy]
   before_action :require_logged_in
-  before_action :redirect_if_unauthorized, only: [:new, :create, :edit, :update, :delete]
+  before_action :redirect_if_unauthorized, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     # @workouts = Workout.all
@@ -43,12 +43,12 @@ class WorkoutsController < ApplicationController
   end
 
   def show
+
     @current_user = current_user
     #do i need to modify this some way bc of the nested resource???
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
       @workout = @user.workouts.find_by(id: params[:id]) if @user
-
       if @workout.nil? && @user
         redirect_to user_workouts_path(@user) #need alert
       else
@@ -56,6 +56,7 @@ class WorkoutsController < ApplicationController
       end
     else
       set_workout
+
     end
   end
 
@@ -77,8 +78,10 @@ class WorkoutsController < ApplicationController
     @workout.update(workout_params) ? (redirect_to workout_path(@workout)) : (render :edit)
   end
 
-  def delete
+  def destroy
     @workout.destroy if @workout.user == current_user
+
+    redirect_to user_workouts_path(current_user)
   end
 
   private
