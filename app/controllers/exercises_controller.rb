@@ -1,5 +1,5 @@
 class ExercisesController < ApplicationController
-  before_action :set_exercise, only: [:show, :edit, :update]
+  before_action :set_exercise, only: [:show, :edit, :update, :destroy]
   before_action :require_logged_in
 
   def index
@@ -18,13 +18,23 @@ class ExercisesController < ApplicationController
   def show
   end
 
-  #do i want users to be able to edit exercises?
+  #do i want users to be able to edit exercises? Maybe
   def edit
   end
 
   def update
     @exercise.update(exercise_params) ? (redirect_to exercise_path(@exercise)) : (render :edit)
   end
+
+  def destroy
+    #had this issue w/ sinatra too -- > how to keep track of who added exercise? or just make it so
+    #an admin can delete an exercise? idk???
+
+    @exercise.destroy
+    #if @exercise.user == current_user
+    redirect_to user_workouts_path(current_user)
+  end
+
 
   ## should users be able to delete exercises?? unsure
 
