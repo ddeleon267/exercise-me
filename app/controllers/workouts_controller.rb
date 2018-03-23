@@ -1,7 +1,7 @@
 class WorkoutsController < ApplicationController
-  before_action :set_workout, only: [:update]
+  before_action :set_workout, only: [:update, :delete]
   before_action :require_logged_in
-  before_action :redirect_if_unauthorized, only: [:new, :create, :edit, :update]
+  before_action :redirect_if_unauthorized, only: [:new, :create, :edit, :update, :delete]
 
   def index
     # @workouts = Workout.all
@@ -75,6 +75,10 @@ class WorkoutsController < ApplicationController
 
   def update
     @workout.update(workout_params) ? (redirect_to workout_path(@workout)) : (render :edit)
+  end
+
+  def delete
+    @workout.destroy if @workout.user == current_user
   end
 
   private

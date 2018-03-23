@@ -32,7 +32,7 @@ class ExercisesController < ApplicationController
 
     @exercise.destroy
     #if @exercise.user == current_user
-    redirect_to user_workouts_path(current_user)
+    redirect_to exercises_path
   end
 
 
