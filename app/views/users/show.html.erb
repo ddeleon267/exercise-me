@@ -1,10 +1,10 @@
-<h1><%= @user.username %></h1>
-<h3><%= @user.username %>'s Workouts </h3>
+<h1><%= @user.name %></h1>
+<h3><%= @user.name %>'s Workouts </h3>
 
 
 <% #This is kind of redundant??? %>
 <% if @user_workouts.empty? %>
-  <p> <%= @user.username %> has not added any workouts yet!<p>
+  <p> <%= @user.name %> has not added any workouts yet!<p>
 <% else %>
   <% @user_workouts.reverse.each do |workout| %>
     <ul><%= link_to workout.name, workout_path(workout) %></a>

@@ -1,5 +1,5 @@
 <h1><%= @workout.name %></h1>
-<p> Added by: <%= link_to @workout.user.username, user_path(@workout.user) if @workout.user %></p>
+<p> Added by: <%= link_to @workout.user.name, user_path(@workout.user) if @workout.user %></p>
 <p><%= last_updated @workout %></p>
 <p><%= @workout.description %></p>
 <p><%= @workout.notes %></p>

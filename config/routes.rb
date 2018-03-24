@@ -20,6 +20,5 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
 
-  #want to name users new differently
-  ##need sessions controller or nah?
+  get '/auth/facebook/callback' => 'sessions#omnicreate'
 end
