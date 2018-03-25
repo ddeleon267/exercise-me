@@ -1,17 +1,14 @@
 class UsersController < ApplicationController
-  #could do a before_action here, if i decide to add additional actions here; e.g. edit/update/delete. unsure.
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_logged_in, except: [:new, :create]
   before_action :redirect_if_logged_in, except: [:show, :home, :edit, :update]
 
   def new
-    #redirect_if_logged_in
     @user = User.new
   end
 
   def show
-    # @user = current_user
-    @user_workouts = @user.workouts #maybe this should bein the model?
+    @user_workouts = @user.workouts #maybe this should be in the model?
   end
 
   def home
@@ -40,11 +37,13 @@ class UsersController < ApplicationController
   end
 
   def update
-    #this is not updating because of passwork validations
+    #this is not updating because of password validations
     @user.update(user_params) ? (redirect_to home_path) : (render :edit)
   end
 
-  #could allow user to destroy profile
+  def destroy
+    #doesn't do anything yet
+  end
 
   private
 

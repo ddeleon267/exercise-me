@@ -1,5 +1,3 @@
-dis the login page
-
 <%= form_for @user, url: login_path, method: :post do |f| %>
   <!-- <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -8,7 +6,7 @@ dis the login page
       </h2>
 
       <ul>
-      <% @user.errors.full_messages.each do |message| %>  
+      <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>

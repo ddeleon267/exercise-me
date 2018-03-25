@@ -31,12 +31,8 @@ class ExercisesController < ApplicationController
     #an admin can delete an exercise? idk???
 
     @exercise.destroy
-    #if @exercise.user == current_user
     redirect_to exercises_path
   end
-
-
-  ## should users be able to delete exercises?? unsure
 
   private
 
