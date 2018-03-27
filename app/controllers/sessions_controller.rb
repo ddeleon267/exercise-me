@@ -22,19 +22,20 @@ class SessionsController < ApplicationController
   end
 
   def omnicreate
-    @user = User.find_or_create_by(uid: auth['uid']) do |u|
-      u.name = auth['info']['name']
-      u.email = auth['info']['email']
-    end
-
+    # raise auth_hash.inspect
+    @user = User.find_or_create_from_auth_hash(auth_hash)
+    # @user = User.find_or_create_by(uid: auth['uid']) do |u|
+    #   u.name = auth['info']['name']
+    #   u.email = auth['info']['email']
+    # end
     session[:user_id] = @user.id
 
-    redirect_to root_path #or home_path????
+    redirect_to home_path #root_path #or home_path????
   end
 
   private
 
-  def auth
+  def auth_hash
     request.env['omniauth.auth']
   end
 

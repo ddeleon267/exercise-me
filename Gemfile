@@ -38,6 +38,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 
 group :development, :test do
