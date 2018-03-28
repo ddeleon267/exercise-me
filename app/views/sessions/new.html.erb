@@ -1,3 +1,8 @@
+<h1>Log In<h2>
+
+<%= content_tag(:div, flash[:error], :id => "flash_error", :class => "fields_with_errors") if flash[:error] %>
+<br>
+
 <%= form_for @user, url: login_path, method: :post do |f| %>
   <!-- <% if @user.errors.any? %>
     <div id="error_explanation">

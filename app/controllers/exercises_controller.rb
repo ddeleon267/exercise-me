@@ -29,7 +29,6 @@ class ExercisesController < ApplicationController
   def destroy
     #had this issue w/ sinatra too -- > how to keep track of who added exercise? or just make it so
     #an admin can delete an exercise? idk???
-
     @exercise.destroy
     redirect_to exercises_path
   end

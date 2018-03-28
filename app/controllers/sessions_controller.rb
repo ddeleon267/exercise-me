@@ -12,7 +12,9 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to controller: 'users', action: 'home'
     else
-      redirect_to login_path
+      @user = User.new(name: session_params[:name])
+      flash[:error] = "Username and password don't match"
+      render :new
     end
   end
 
