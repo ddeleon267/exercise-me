@@ -24,7 +24,6 @@ class SessionsController < ApplicationController
   end
 
   def omnicreate
-    binding.pry
     # raise auth_hash.inspect
     @user = User.find_or_create_from_auth_hash(auth_hash)
     # @user = User.find_or_create_by(uid: auth['uid']) do |u|

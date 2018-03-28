@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     unauth_user_access = params[:user_id] && current_user.id != params[:user_id].to_i
     unauth_workout_access = params[:id] && !current_user.workouts.map{|w| w.id}.include?(params[:id].to_i)
 
-    redirect_to home_path if unauth_user_access || unauth_workout_access
+    home_path if unauth_user_access || unauth_workout_access
 
     #examples to test
     ## workouts/1/edit --- good

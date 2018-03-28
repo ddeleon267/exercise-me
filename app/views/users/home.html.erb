@@ -1,4 +1,9 @@
-<h1>Welcome, <%= @user.name %></h1>
+<% if @user %>
+  <h1>Welcome, <%= @user.name %></h1>
+<% end %>
+
+<%= content_tag(:div, flash[:error], :id => "flash_error", :class => "fields_with_errors") if flash[:error] %>
+<br>
 
 <h3>Recently Added Workouts From the Community</h3>
 <% if !@workouts.empty? %>

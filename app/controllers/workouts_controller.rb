@@ -4,14 +4,14 @@ class WorkoutsController < ApplicationController
   before_action :redirect_if_unauthorized, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    #this is funky cuz of nested resource
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
-      if @user.nil?
-        redirect_to home_path #need some kind of alert / flash msg
-      else
-        @workouts = User.find(params[:user_id]).workouts
-      end
+      # if @user.nil?
+      #   redirect_to home_path
+      # else
+      #   @workouts = User.find(params[:user_id]).workouts
+      # end
+      @user.nil? ? (redirect_to home_path) : (@workouts = User.find(params[:user_id]).workouts)
     else
       @workouts = Workout.all
     end
@@ -19,7 +19,7 @@ class WorkoutsController < ApplicationController
 
   def new
     if params[:user_id] && !User.exists?(params[:user_id])
-      redirect_to new_workout_path #need alert that user was not found
+      redirect_to new_workout_path
     else
       @workout = Workout.new(user_id: params[:user_id])
       @exercises = @workout.exercises.build
@@ -38,11 +38,13 @@ class WorkoutsController < ApplicationController
     if params[:user_id]
       @user = User.find_by(id: params[:user_id])
       @workout = @user.workouts.find_by(id: params[:id]) if @user
-      if @workout.nil? && @user
-        redirect_to user_workouts_path(@user) #need alert
-      else
-        set_workout #need alert
-      end
+      (@workout.nil? && @user) ? (redirect_to user_workouts_path(@user)) : (set_workout)
+
+      # if @workout.nil? && @user
+      #   redirect_to user_workouts_path(@user) #need alert
+      # else
+      #   set_workout #need alert
+      # end
     else
       set_workout
     end
@@ -52,10 +54,10 @@ class WorkoutsController < ApplicationController
     if params[:user_id]
       user = User.find_by(id: params[:user_id])
       if user.nil?
-        redirect_to home_path #need alert and might choose to redirect elsewhere
+        redirect_to home_path
       else
         @workout = user.workouts.find_by(id: params[:id])
-        redirect_to user_workouts_path(user) if @workout.nil? #need alert
+        redirect_to user_workouts_path(user) if @workout.nil?
       end
     else
       set_workout
