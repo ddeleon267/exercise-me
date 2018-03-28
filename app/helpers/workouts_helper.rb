@@ -5,7 +5,7 @@ module WorkoutsHelper
 
   def user_id_field(workout)   #am i using this somewhere? where am i using this??
     if workout.user.nil?
-      select_tag "workout[user_id]", options_from_collection_for_select(User.all, :id, :username)
+      select_tag "workout[user_id]", options_from_collection_for_select(User.all, :id, :name)
     else
       hidden_field_tag "workout[user_id]", workout.user_id
     end
