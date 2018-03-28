@@ -1,17 +1,19 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_logged_in, except: [:new, :create]
-  before_action :redirect_if_logged_in, except: [:show, :home, :edit, :update]
+  before_action :redirect_if_logged_in, except: [:show, :home, :edit, :update, :destroy]
 
   def new
     @user = User.new
   end
 
   def show
+    # binding.pry
     @user_workouts = @user.workouts #maybe this should be in the model?
   end
 
   def home
+    # binding.pry
     @user = current_user
     @workouts = Workout.all
     @exercises = Exercise.all

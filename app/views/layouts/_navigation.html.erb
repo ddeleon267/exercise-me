@@ -1,7 +1,7 @@
 <h3>
 <center>
 
-<% if logged_in? %>
+ <% if current_user && logged_in? %>
   <%= link_to "Home", home_path %>
   <%= link_to "Add a New Exercise", new_exercise_path %>
   <%= link_to "View all Exercises", exercises_path %>
@@ -9,11 +9,11 @@
   <%= link_to "View all Workouts", workouts_path %>
   <%= link_to "View Profile", user_path(session[:user_id]) %>
   <%= link_to "Log out", logout_path, method: :delete %>
-<% else %>
+ <% else %>
   <%= link_to "Sign up", signup_path %>
   <%= link_to "Log in", login_path %>
   <%= link_to "Log in with Twitter", "/auth/twitter" %>
-<% end %>
+ <% end %>
 
 </h3>
 </center>
