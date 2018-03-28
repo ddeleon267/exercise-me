@@ -11,7 +11,6 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }
   #validates :password, confirmation: true
 
-  #probably will need method to handle omniauth here
   def self.find_or_create_from_auth_hash(auth_hash)
     user = where(uid: auth_hash.uid).first_or_create
 

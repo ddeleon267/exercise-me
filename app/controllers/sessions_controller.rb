@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     @user = User.find_by(name: session_params[:name])
     if @user && @user.authenticate(session_params[:password])
       session[:user_id] = @user.id
-      redirect_to controller: 'users', action: 'home'
+      redirect_to home_path
     else
       @user = User.new(name: session_params[:name])
       flash[:error] = "Username and password don't match"
@@ -24,7 +24,6 @@ class SessionsController < ApplicationController
   end
 
   def omnicreate
-    # raise auth_hash.inspect
     @user = User.find_or_create_from_auth_hash(auth_hash)
     # @user = User.find_or_create_by(uid: auth['uid']) do |u|
     #   u.name = auth['info']['name']
@@ -32,7 +31,7 @@ class SessionsController < ApplicationController
     # end
     session[:user_id] = @user.id
 
-    redirect_to home_path #root_path #or home_path????
+    redirect_to home_path
   end
 
   private
