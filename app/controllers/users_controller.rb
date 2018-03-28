@@ -20,16 +20,12 @@ class UsersController < ApplicationController
 
   def create
     @user = User.create(user_params)
-
     if @user.save
       session[:user_id] = @user.id
       redirect_to home_path
     else
       render :new
     end
-
-    #could choose to do it this way. idk if i like it tho; not so readable
-    # @user.save ? (session[:user_id] = @user.id; redirect_to home_path ) : (render :new)
   end
 
   def edit
@@ -42,7 +38,8 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    #doesn't do anything yet
+    @user.destroy
+    redirect_to root_path
   end
 
   private
