@@ -1,44 +1,41 @@
 <%= form_for(@workout) do |f| %>
   <%= render partial: "layouts/errors", locals: { object: @workout } %>
 
-  <%= f.label :name %>
+  <%= f.label "Workout Name:" %>
   <%= f.text_field :name %>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <br>
 
   <h3>Exercises</h3>
 
-  <h4>Choose from Existing Exercises</h4>
-  <ul><%= f.label :exercises %>
-  <%= f.collection_check_boxes :exercise_ids, Exercise.all, :id, :name %>
-  </ul>
+  <fieldset>
+    <h4>Choose from Existing Exercises:</h4>
+    <ul><%= f.label :exercises %>
+      <%= f.collection_check_boxes :exercise_ids, Exercise.all, :id, :name %>
+    </ul>
+  </fieldset>
 
-  <h4>Add a New Exercise</h4>
-  <%= f.fields_for :exercises, @workout.exercises.build do |exercises_fields| %>
-    Exercise Name: <%= exercises_fields.text_field :name %>
-    Muscle Group: <%= exercises_fields.text_field :muscle_group %>
-  <% end %>
+  <fieldset>
+    <h4>Or, Add a New Exercise</h4>
+    <%= f.fields_for :exercises, @workout.exercises.build do |exercises_fields| %>
+      <%= exercises_fields.label "Exercise Name" %>
+      <%= exercises_fields.text_field :name %>
+      <%= exercises_fields.label :muscle_group %>
+      <%= exercises_fields.text_field :muscle_group %>
+    <% end %>
+  </fieldset>
 
   <br>
-  <br>
-  <br>
-
-  <%= f.label :description %>
+  <%= f.label :"Workout Description:" %>
   <%= f.text_field :description %>
-
   <br>
   <br>
-
   <%= f.label "Notes:" %>
   <%= f.text_area :notes %>
-
   <br>
   <br>
-
   <%= f.label "Date:" %>
   <%= f.text_field :date %>
-
-  <br>
   <br>
   <br>
   <%= f.submit %>
