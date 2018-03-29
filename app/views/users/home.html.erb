@@ -13,19 +13,19 @@
 <% end %>
 
 <h3>Recently Added Exercises</h3>
-  <% if !@exercises.empty? %>
-    <ul>
-      <% @exercises.reverse.take(10).each do |exercise| %>
-        <li><%= link_to exercise.name, exercise_path(exercise) %></li>
-      <% end %>
-    </ul>
-  <% end %>
+<% if !@exercises.empty? %>
+  <ul>
+    <% @exercises.reverse.take(10).each do |exercise| %>
+      <li><%= link_to exercise.name, exercise_path(exercise) %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <h3>Explore New Users!</h3>
-  <% if !@users.empty? %>
-    <ul>
-      <% @users.reverse.take(10).each do |user| %>
-        <li><%= link_to user.name, user_path(user) %></a></li>
-      <% end %>
-    </ul>
-  <% end %>
+<% if !@users.empty? %>
+  <ul>
+    <% @users.reverse.take(10).each do |user| %>
+      <li><%= link_to user.name, user_path(user) %></a></li>
+    <% end %>
+  </ul>
+<% end %>

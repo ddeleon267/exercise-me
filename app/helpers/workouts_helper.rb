@@ -1,6 +1,6 @@
 module WorkoutsHelper
   def last_updated(workout)
-    workout.updated_at.strftime("Last updated %A, %b %e, at %l:%M %p")
+    workout.updated_at.strftime("Last updated: %A, %b %e, at %l:%M %p")
   end
 
   # def user_id_field(workout)   #am i using this somewhere? where am i using this??
