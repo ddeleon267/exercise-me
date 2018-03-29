@@ -1,11 +1,10 @@
 class User < ApplicationRecord
   has_secure_password
-  has_many :workouts #, dependent: :destroy
+  has_many :workouts, dependent: :destroy
 
   validates_presence_of :name, :password
   validates :name, length: { minimum: 3 }, uniqueness: { case_sensitive: false }
 
-  # validates :email, uniqueness: true  #took this out because twitter issue
   validates :email, uniqueness: true, allow_blank: true
 
   validates :password, length: { minimum: 6 }

@@ -1,19 +1,17 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :require_logged_in, except: [:new, :create]
-  before_action :redirect_if_logged_in, except: [:show, :home, :edit, :update, :destroy]
-
+  before_action :redirect_if_logged_in, only: [:new, :create]
+  
   def new
     @user = User.new
   end
 
   def show
-    # binding.pry
     @user_workouts = @user.workouts #maybe this should be in the model?
   end
 
   def home
-    # binding.pry
     @user = current_user
     @workouts = Workout.all
     @exercises = Exercise.all
@@ -31,11 +29,10 @@ class UsersController < ApplicationController
   end
 
   def edit
-    #do i need to do something extra to protect against unauth users?
+    redirect_to root_path unless @user.id == current_user.id
   end
 
   def update
-    #this is not updating because of password validations
     @user.update(user_params) ? (redirect_to home_path) : (render :edit)
   end
 

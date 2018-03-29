@@ -1,7 +1,7 @@
 class WorkoutsController < ApplicationController
   before_action :set_workout, only: [:update, :destroy]
   before_action :require_logged_in
-  before_action :redirect_if_unauthorized, only: [:new, :create, :edit, :update, :destroy]
+  before_action :redirect_if_unauthorized, except: [:index, :show]
 
   def index
     if params[:user_id]
