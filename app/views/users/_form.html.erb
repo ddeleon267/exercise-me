@@ -1,24 +1,16 @@
 <%= form_for @user do |f| %>
   <%= render partial: "layouts/errors", locals: { object: @user } %>
-
-  <div class="field">
     <%= f.label :name %>
-    <br>
     <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
+    <br>
+    <br>
     <%= f.label :email %>
-    <br>
     <%= f.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password unless logged_in? %>
     <br>
+    <br>
+    <%= f.label :password unless logged_in? %>
     <%= f.password_field :password unless logged_in?%>
-
-  <div class="actions">
+    <br>
+    <br>
     <%= f.submit %>
-  </div>
 <% end %>
