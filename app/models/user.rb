@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, allow_blank: true
 
   validates :password, length: { minimum: 6 }
-  #validates :password, confirmation: true
+  validates :password, confirmation: true
 
   def self.find_or_create_from_auth_hash(auth_hash)
     user = where(uid: auth_hash.uid).first_or_create
