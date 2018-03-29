@@ -1,4 +1,6 @@
 <h1><%= @user.name %></h1>
+<p><%= link_to "Edit or Delete Your Profile", edit_user_path(@user) if @user == current_user %><p>
+
 <h3><%= @user.name %>'s Workouts </h3>
 
 <% if @user_workouts.empty? %>
