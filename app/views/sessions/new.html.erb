@@ -1,8 +1,8 @@
+<!-- Don't know if i love how the nav links display here-->
+
 <h1>Log In<h2>
 
 <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "fields_with_errors") if flash[:error] %>
-<br>
-
 <%= form_for @user, url: login_path, method: :post do |f| %>
   <!-- <% if @user.errors.any? %>
     <div id="error_explanation">
@@ -17,19 +17,12 @@
       </ul>
     </div>
   <% end %> -->
-
-  <div class="field">
     <%= f.label :name %>
-    <br>
     <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
     <br>
+    <%= f.label :password %>
     <%= f.password_field :password %>
-
-  <div class="actions">
+    <br>
     <%= f.submit "log in" %>
     Or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
   </div>
