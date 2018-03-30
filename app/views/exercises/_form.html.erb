@@ -5,7 +5,7 @@
   <%= f.text_field :name %><br>
 
   <%= f.label :muscle_group %>
-  <%= f.text_field :muscle_group %><br>
+  <%= f.select "muscle_group", options_for_select(["glutes", "abdominals", "chest", "quadriceps", "hamstrings", "calves", "back", "shoulders", "biceps", "triceps"]) %>
 
   <%= f.label :equipment %>
   <%= f.text_field :equipment %><br>
