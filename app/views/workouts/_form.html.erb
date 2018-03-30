@@ -11,7 +11,11 @@
   <fieldset>
     <h4>Choose from Existing Exercises:</h4>
     <ul><%= f.label :exercises %>
-      <%= f.collection_check_boxes :exercise_ids, Exercise.all, :id, :name %>
+      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
+      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
+      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
+      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
+      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
     </ul>
   </fieldset>
 
