@@ -9,17 +9,27 @@
   <h3>Exercises</h3>
 
   <fieldset>
-    <h4>Choose from Existing Exercises:</h4>
-    <ul><%= f.label :exercises %>
-      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
-      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
-      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
-      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
-      <li><%= f.collection_select :exercise_ids, Exercise.all, :id, :name %></li>
-    </ul>
-  </fieldset>
+  <h4>Choose from Existing Exercises:</h4>
+  <%= f.fields_for :workout_exercises do |workout_exercise| %>
 
-  <fieldset>
+
+      <%= workout_exercise.fields_for :exercise do |exercise| %>
+        <%= exercise.label :name %>
+        <%= exercise.text_field :name %>
+      <% end %>
+
+    <%= workout_exercise.label :sets %>
+    <%= workout_exercise.text_field :sets %>
+    <%= workout_exercise.label :reps %>
+    <%= workout_exercise.text_field :reps %>
+    <br>
+    <br>
+
+
+   <% end %>
+   </fieldset>
+
+   <!-- <fieldset>
     <h4>Or, Add a New Exercise</h4>
     <%= f.fields_for :exercises, @workout.exercises.build do |exercises_fields| %>
       <%= exercises_fields.label "Exercise Name" %>
@@ -27,20 +37,7 @@
       <%= exercises_fields.label :muscle_group %>
       <%= exercises_fields.text_field :muscle_group %>
     <% end %>
-  </fieldset>
+  </fieldset> -->
 
-  <br>
-  <%= f.label :"Workout Description:" %>
-  <%= f.text_field :description %>
-  <br>
-  <br>
-  <%= f.label "Notes:" %>
-  <%= f.text_area :notes %>
-  <br>
-  <br>
-  <%= f.label "Date:" %>
-  <%= f.text_field :date %>
-  <br>
-  <br>
   <%= f.submit %>
 <% end %>

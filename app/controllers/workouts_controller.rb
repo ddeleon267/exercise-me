@@ -22,14 +22,26 @@ class WorkoutsController < ApplicationController
       redirect_to new_workout_path
     else
       @workout = Workout.new(user_id: params[:user_id])
-      @exercises = @workout.exercises.build
+      # @exercises = @workout.exercises.build
+
+      5.times { @workout.workout_exercises.build.build_exercise }
+
+
     end
   end
 
   def create
-    @workout = Workout.new(workout_params)
-    @workout.user_id = current_user.id
-    @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
+    # @workout = Workout.new(workout_params)
+    # @workout.user_id = current_user.id
+    #
+    # @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
+    @workout = current_user.workouts.build(workout_params)
+    if @workout.save
+      redirect_to workout_path(@workout)
+    else
+      5.times { @workout.workout_exercises.build.build_exercise }
+      render 'new'
+    end
   end
 
   def show
@@ -65,6 +77,8 @@ class WorkoutsController < ApplicationController
   end
 
   def update
+    binding.pry
+    @workout.workout_exercises.clear
     @workout.update(workout_params) ? (redirect_to workout_path(@workout)) : (render :edit)
   end
 
@@ -76,7 +90,7 @@ class WorkoutsController < ApplicationController
   private
 
   def workout_params
-    params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[], exercises_attributes: [:name, :muscle_group])
+    params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[], workout_exercises_attributes: [:sets, :reps, exercise_attributes: [:name]])
   end
 
   def set_workout
