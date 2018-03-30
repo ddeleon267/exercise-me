@@ -1,3 +1,9 @@
+<h2>Filter exercises:</h2>
+<%= form_tag("/exercises", method: "get") do %>
+  <%= select_tag "muscle_group", options_for_select(["booty", "abdominals"]), include_blank: true %>
+  <%= submit_tag "Filter" %>
+<% end %>
+
 <% exercises.each do |e| %>
   <ul> <%= link_to "#{e.name}", exercise_path(e) %>
     <li><%= e.muscle_group %></li>

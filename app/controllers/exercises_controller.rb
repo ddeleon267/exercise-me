@@ -2,8 +2,13 @@ class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
   before_action :require_logged_in
 
+
   def index
-    @exercises = Exercise.all
+     if !params[:muscle_group].blank?
+       @exercises = Exercise.muscle_group(params[:muscle_group])
+     else
+       @exercises = Exercise.all
+     end
   end
 
   def new
