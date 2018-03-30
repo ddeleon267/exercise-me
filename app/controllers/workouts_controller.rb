@@ -23,10 +23,7 @@ class WorkoutsController < ApplicationController
     else
       @workout = Workout.new(user_id: params[:user_id])
       # @exercises = @workout.exercises.build
-
       5.times { @workout.workout_exercises.build.build_exercise }
-
-
     end
   end
 
@@ -77,7 +74,6 @@ class WorkoutsController < ApplicationController
   end
 
   def update
-    binding.pry
     @workout.workout_exercises.clear
     @workout.update(workout_params) ? (redirect_to workout_path(@workout)) : (render :edit)
   end
