@@ -1,12 +1,13 @@
 # README
 
-Exercise-Me is a tool for users to create and and share exercises and workout routines.
+Exercise-Me is a tool for users to create and share exercises and workout routines.
 
 # Getting Started
 
 To get a copy of the project up and running on your local machine for development and testing purposes:
 
 Fork this repo and clone it to your computer. Run 'bundle install'. Then migrate and seed the database with 'rake db:migrate' 'and rake db:seed'.
+Start the server with 'rails s' or 'rails server'
 
 # Built with
 Rails, Omniauth, SQLite
