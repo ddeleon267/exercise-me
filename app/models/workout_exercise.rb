@@ -2,6 +2,8 @@ class WorkoutExercise < ApplicationRecord
   belongs_to :workout, optional: true
   belongs_to :exercise, optional: true
 
+  validates_presence_of :sets, :reps
+
   #probably need validations, sigh
 
   #from my example,, moved over from workout model
