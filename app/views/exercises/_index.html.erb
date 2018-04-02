@@ -1,6 +1,6 @@
 <h2>Filter exercises:</h2>
 <%= form_tag("/exercises", method: "get") do %>
-  <%= select_tag "muscle_group", options_for_select(["glutes", "abdominals", "chest", "quadriceps", "hamstrings", "calves", "back", "shoulders", "biceps", "triceps"]), include_blank: true %>
+  <%= select_tag "muscle_group", options_for_select(["", "Glutes", "Abdominals", "Chest", "Quadriceps", "Hamstrings", "Calves", "Back", "Shoulders", "Biceps", "Triceps", "Multiple"]) %>
   <%= submit_tag "Filter" %>
 <% end %>
 
