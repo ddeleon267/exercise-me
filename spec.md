@@ -4,21 +4,21 @@ Specs:
 - [x] Using Ruby on Rails for the project
 
 - [x] Include at least one has_many relationship (x has_many y e.g. User has_many Recipes)
-User has_many workouts (User model line 3)
+User has_many Workouts (User model line 3)
 
 - [x] Include at least one belongs_to relationship (x belongs_to y e.g. Post belongs_to User)
-Workout belongs_to user (Workout model line 2)
+Workout belongs_to User (Workout model line 2)
 
 - [x] Include at least one has_many through relationship (x has_many y through z e.g. Recipe has_many Items through Ingredients)
-Workout has_many exercises, through workout_exercises (Workout model line 5)
+Workout has_many Exercises, through Workout_exercises (Workout model line 5)
 
 - [x] The "through" part of the has_many through includes at least one user submittable attribute (attribute_name e.g. ingredients.quantity)
-The WorkoutExercises model (join table) has attributes of sets and reps; both can be set by the user when a workout is created.
+The WorkoutExercise model (join table) has attributes of sets and reps; both can be set by the user when a workout is created.
 
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
-User (presence, length, and uniqueness of name, password;  presence, length, and confirmation of password, uniqueness of email)
-Workout (presence of name)
-Workout_exercise (presence of sets, reps)
+User (presence, length, and uniqueness of name, password;  presence, length, and confirmation of password, uniqueness of email);
+Workout (presence of name);
+Workout_exercise (presence of sets, reps);
 Exercise (presence and uniqueness of name, presence of muscle group)
 
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
