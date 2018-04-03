@@ -7,5 +7,4 @@ class Workout < ApplicationRecord
   validates_presence_of :name
 
   accepts_nested_attributes_for :workout_exercises, :reject_if => proc { |attr| attr[:sets].blank? && attr[:reps].blank? && attr[:exercise_attributes][:name].blank? }
-
 end

@@ -4,7 +4,6 @@ class Exercise < ApplicationRecord
   # scope :alive, -> { where(deceased: false) }
   scope :muscle_group, -> (muscle_group) { where("muscle_group == ?", muscle_group) }
 
-
   validates_presence_of :name
   validates :name, uniqueness: true
 
