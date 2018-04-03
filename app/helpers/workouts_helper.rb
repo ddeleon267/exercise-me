@@ -4,7 +4,7 @@ module WorkoutsHelper
   end
 
   def workout_date(workout)
-    workout.date.strftime("%A, %b %e")
+    workout.date ? workout.date.strftime("%A, %b %e") : ""
   end
 
   # def user_id_field(workout)   #am i using this somewhere? where am i using this??
