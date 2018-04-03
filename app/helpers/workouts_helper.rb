@@ -3,6 +3,10 @@ module WorkoutsHelper
     workout.updated_at.strftime("Last updated: %A, %b %e, at %l:%M %p")
   end
 
+  def workout_date(workout)
+    workout.date.strftime("%A, %b %e")
+  end
+
   # def user_id_field(workout)   #am i using this somewhere? where am i using this??
   #   binding.pry
   #   if workout.user.nil?

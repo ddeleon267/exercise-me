@@ -5,10 +5,10 @@
 <% end %>
 
 <p> Added by: <%= link_to @workout.user.name, user_path(@workout.user) if @workout.user %></p>
-<p><%= last_updated @workout %></p>
 <p> Workout Description: <%= @workout.description %></p>
 <p> Notes: <%= @workout.notes %></p>
-<p> Date: <%= @workout.date %></p>
+<p> Date: <%= workout_date @workout %></p>
+<p><%= last_updated @workout %></p>
 <p> Exercises:</p>
 
 
