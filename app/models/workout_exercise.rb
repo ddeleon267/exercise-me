@@ -4,22 +4,6 @@ class WorkoutExercise < ApplicationRecord
 
   validates_presence_of :sets, :reps
 
-  #probably need validations, sigh
-
-  #from my example,, moved over from workout model
-  # def exercises_attributes=(attributes)
-  #   # attributes.values.each do |attribute|
-  #   #   exercise = Exercise.find_or_create_by(attribute)
-  #   #   self.exercises << exercise
-  #   #   self.exercises.reject { |exercise| exercise.destroy if exercise.name.blank? || exercise.muscle_group.blank? }
-  #   # end
-  #   attributes.each do |key, attributes|
-  #     self.exercises.build(attributes)
-  #     self.exercises.reject { |exercise| exercise.destroy if exercise.name.blank? || exercise.muscle_group.blank?  }
-  #   end
-  # end
-
-  #from her example
   def exercise_attributes=(exercise_attributes)
     exercise_attributes.values.each do |attribute|
       if attribute != ""
@@ -29,3 +13,16 @@ class WorkoutExercise < ApplicationRecord
     end
   end
 end
+
+#from my previous example,, moved over from workout model
+# def exercises_attributes=(attributes)
+#   # attributes.values.each do |attribute|
+#   #   exercise = Exercise.find_or_create_by(attribute)
+#   #   self.exercises << exercise
+#   #   self.exercises.reject { |exercise| exercise.destroy if exercise.name.blank? || exercise.muscle_group.blank? }
+#   # end
+#   attributes.each do |key, attributes|
+#     self.exercises.build(attributes)
+#     self.exercises.reject { |exercise| exercise.destroy if exercise.name.blank? || exercise.muscle_group.blank?  }
+#   end
+# end

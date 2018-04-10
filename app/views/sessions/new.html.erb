@@ -4,19 +4,6 @@
 
 <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "fields_with_errors") if flash[:error] %>
 <%= form_for @user, url: login_path, method: :post do |f| %>
-  <!-- <% if @user.errors.any? %>
-    <div id="error_explanation">
-      <h2>
-        <%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:
-      </h2>
-
-      <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %> -->
     <%= f.label :name %>
     <%= f.text_field :name %>
     <br>

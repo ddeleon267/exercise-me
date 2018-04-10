@@ -3,8 +3,8 @@
 <% end %>
 
 <h3>Recently Added Workouts From the Community</h3>
-<% if !@workouts.empty? %>
-  <% @workouts.reverse.take(5).each do |workout| %>
+<% unless @workouts.empty? %>
+  <% @workouts.last(5).reverse.each do |workout| %>
     <% user = (@current_user.id == workout.user_id) ? "you" : workout.user.name %>
       <ul><%= link_to workout.name, workout_path(workout) %>
         <li>Added by <%= link_to workout.user.name, user_path(workout.user) %></li>
@@ -13,18 +13,18 @@
 <% end %>
 
 <h3>Recently Added Exercises</h3>
-<% if !@exercises.empty? %>
+<% unless @exercises.empty? %>
   <ul>
-    <% @exercises.reverse.take(10).each do |exercise| %>
+    <% @exercises.last(10).reverse.each do |exercise| %>
       <li><%= link_to exercise.name, exercise_path(exercise) %></li>
     <% end %>
   </ul>
 <% end %>
 
 <h3>Explore New Users!</h3>
-<% if !@users.empty? %>
+<% unless @users.empty? %>
   <ul>
-    <% @users.reverse.take(10).each do |user| %>
+    <% @users.last(10).reverse.each do |user| %>
       <li><%= link_to user.name, user_path(user) %></a></li>
     <% end %>
   </ul>

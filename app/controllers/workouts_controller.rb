@@ -5,13 +5,8 @@ class WorkoutsController < ApplicationController
 
   def index
     if params[:user_id]
-      @user = User.find_by(id: params[:user_id])
-      # if @user.nil?
-      #   redirect_to home_path
-      # else
-      #   @workouts = User.find(params[:user_id]).workouts
-      # end
-      @user.nil? ? (redirect_to home_path) : (@workouts = User.find(params[:user_id]).workouts)
+      set_user
+      @user.nil? ? (redirect_to home_path) : (@workouts = @user.workouts)
     else
       @workouts = Workout.all
     end
@@ -45,7 +40,7 @@ class WorkoutsController < ApplicationController
     @current_user = current_user
     #do i need to modify this some way bc of the nested resource???
     if params[:user_id]
-      @user = User.find_by(id: params[:user_id])
+      set_user
       @workout = @user.workouts.find_by(id: params[:id]) if @user
       (@workout.nil? && @user) ? (redirect_to user_workouts_path(@user)) : (set_workout)
 
@@ -61,11 +56,11 @@ class WorkoutsController < ApplicationController
 
   def edit
     if params[:user_id]
-      user = User.find_by(id: params[:user_id])
-      if user.nil?
+      set_user
+      if @user.nil?
         redirect_to home_path
       else
-        @workout = user.workouts.find_by(id: params[:id])
+        @workout = @user.workouts.find_by(id: params[:id])
         redirect_to user_workouts_path(user) if @workout.nil?
       end
     else
@@ -84,6 +79,9 @@ class WorkoutsController < ApplicationController
   end
 
   private
+  def set_user
+    @user = User.find_by(id: params[:user_id])
+  end
 
   def workout_params
     params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[], workout_exercises_attributes: [:sets, :reps, exercise_attributes: [:name]])

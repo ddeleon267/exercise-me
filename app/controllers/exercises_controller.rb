@@ -20,13 +20,6 @@ class ExercisesController < ApplicationController
     @exercise.save ? (redirect_to exercise_path(@exercise)) : (render :new)
   end
 
-  def show
-  end
-
-  #do i want users to be able to edit exercises? Maybe
-  def edit
-  end
-
   def update
     @exercise.update(exercise_params) ? (redirect_to exercise_path(@exercise)) : (render :edit)
   end
