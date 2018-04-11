@@ -5,6 +5,7 @@ class WorkoutExercise < ApplicationRecord
   validates_presence_of :sets, :reps
 
   def exercise_attributes=(exercise_attributes)
+    #put a binding in here and play
     exercise_attributes.values.each do |attribute|
       if attribute != ""
         new_exercise = Exercise.find_or_create_by(name: attribute)

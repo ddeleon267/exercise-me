@@ -10,8 +10,8 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }
   validates :password, confirmation: true
 
-  def self.find_or_create_from_auth_hash(auth_hash)
-    user = where(uid: auth_hash.uid).first_or_create
+  def self.find_or_create_from_auth_hash(auth_hash) ##
+    user = where(uid: auth_hash.uid).first_or_create ## wat dis do?
 
     user.name = auth_hash[:info][:nickname]
     user.password = SecureRandom.hex

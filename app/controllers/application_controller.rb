@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
+    ## so why is there params[:user_id]?
   end
 
   def logged_in?
@@ -19,9 +20,12 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_unauthorized
+    ##specifically this is intended to protect a user's workouts.
+    ##a user should not be able to use nested url path to 'hack'; i.e. tro try to
+    ##create, edit, or destroy another user's workout.
     unauth_user_access = params[:user_id] && current_user.id != params[:user_id].to_i
     unauth_workout_access = params[:id] && !current_user.workouts.map(&:id).include?(params[:id].to_i)
-
+    ##should not be able to use unnested route to do this either
     redirect_to home_path if unauth_user_access || unauth_workout_access
   end
 end

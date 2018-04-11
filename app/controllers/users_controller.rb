@@ -7,17 +7,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def show
-    @user_workouts = @user.workouts #maybe this should be in the model?
-  end
-
-  def home
-    @user = current_user
-    @workouts = Workout.all
-    @exercises = Exercise.all
-    @users = User.all
-  end
-
   def create
     @user = User.create(user_params)
     if @user.save
@@ -28,11 +17,22 @@ class UsersController < ApplicationController
     end
   end
 
+  def home
+    @user = current_user
+    @workouts = Workout.all
+    @exercises = Exercise.all
+    @users = User.all
+  end
+
+  def show
+    @user_workouts = @user.workouts #maybe this should be in the model?
+  end
+
   def edit
     redirect_to root_path unless @user.id == current_user.id
   end
 
-  def update
+  def update #might choose to redirect to profile page
     @user.update(user_params) ? (redirect_to home_path) : (render :edit)
   end
 
@@ -43,11 +43,12 @@ class UsersController < ApplicationController
 
   private
 
-  def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :uid)
-  end
+    def user_params
+      params.require(:user).permit(:name, :email, :password, :password_confirmation, :uid)
+    end
 
-  def set_user
-    @user = User.find(params[:id])
-  end
+    def set_user
+      @user = User.find(params[:id])
+    end
+
 end

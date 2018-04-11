@@ -1,5 +1,4 @@
 <!-- Don't know if i love how the nav links display here-->
-
 <h1>Log In<h2>
 
 <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "fields_with_errors") if flash[:error] %>
@@ -11,6 +10,6 @@
     <%= f.password_field :password %>
     <br>
     <%= f.submit "log in" %>
-    Or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %>
+    Or <%= link_to(controller: 'users', action: 'new') { 'sign up' } %><!-- could be nicer? -->
   </div>
 <% end %>

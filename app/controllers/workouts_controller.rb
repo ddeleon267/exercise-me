@@ -13,12 +13,14 @@ class WorkoutsController < ApplicationController
   end
 
   def new
+    #could maybe redo this second condition
     if params[:user_id] && !User.exists?(params[:user_id])
       redirect_to new_workout_path
     else
       @workout = Workout.new(user_id: params[:user_id])
       # @exercises = @workout.exercises.build
-      5.times { @workout.workout_exercises.build.build_exercise }
+      build_exercises
+      #could play around with a pry in here
     end
   end
 
@@ -28,10 +30,12 @@ class WorkoutsController < ApplicationController
     #
     # @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
     @workout = current_user.workouts.build(workout_params)
+    #maybe try to clean this up
     if @workout.save
       redirect_to workout_path(@workout)
     else
-      5.times { @workout.workout_exercises.build.build_exercise }
+      build_exercises
+      #or at least refactor this
       render 'new'
     end
   end
@@ -41,7 +45,7 @@ class WorkoutsController < ApplicationController
     #do i need to modify this some way bc of the nested resource???
     if params[:user_id]
       set_user
-      @workout = @user.workouts.find_by(id: params[:id]) if @user
+      set_user_workout if @user
       (@workout.nil? && @user) ? (redirect_to user_workouts_path(@user)) : (set_workout)
 
       # if @workout.nil? && @user
@@ -60,7 +64,7 @@ class WorkoutsController < ApplicationController
       if @user.nil?
         redirect_to home_path
       else
-        @workout = @user.workouts.find_by(id: params[:id])
+        set_user_workout
         redirect_to user_workouts_path(user) if @workout.nil?
       end
     else
@@ -79,16 +83,28 @@ class WorkoutsController < ApplicationController
   end
 
   private
-  def set_user
-    @user = User.find_by(id: params[:user_id])
-  end
 
-  def workout_params
-    params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[], workout_exercises_attributes: [:sets, :reps, exercise_attributes: [:name]])
-  end
+    def set_user
+      @user = User.find_by(id: params[:user_id])
+    end
 
-  def set_workout
-    @workout = Workout.find(params[:id])
-  end
+    def workout_params
+      params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[],
+      workout_exercises_attributes: [:sets, :reps, exercise_attributes: [:name]])
+      #unsure if i need exercise ids
+      #hopefully i didn't just break this
+    end
+
+    def set_workout
+      @workout = Workout.find(params[:id])
+    end
+
+    def set_user_workout
+      @workout = @user.workouts.find_by(id: params[:id])
+    end
+
+    def build_exercises
+      5.times { @workout.workout_exercises.build.build_exercise }
+    end
 
 end

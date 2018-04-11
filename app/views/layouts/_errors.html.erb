@@ -1,3 +1,7 @@
+<!-- could i try doing this instead?-->
+<!-- # <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "fields_with_errors") if flash[:error] %> -->
+
+
 <% if object.errors.any? %>
   <h2>Oh no!</h2>
   <div id="error_explanation">
@@ -6,9 +10,9 @@
     </h2>
 
     <ul>
-    <% object.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
+      <% object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
     </ul>
   </div>
 <% end %>
