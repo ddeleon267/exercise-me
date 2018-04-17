@@ -41,6 +41,7 @@ class WorkoutsController < ApplicationController
   end
 
   def show
+    ##will break if workout is not found 
     @current_user = current_user
     #do i need to modify this some way bc of the nested resource???
     if params[:user_id]
