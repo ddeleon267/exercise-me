@@ -10,16 +10,13 @@ Rails.application.routes.draw do
     resources :workouts, only: [:index, :show, :new, :edit, :destroy]
   end
 
-  resources :exercises, :workout_exercises, :workouts
-  #could probably make this drier, do i need all of this?
+  resources :exercises, :workouts
 
   get "/signup", to: "users#new"
-
   get "/home", to: "users#home"
 
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-
   get '/auth/twitter/callback' => 'sessions#omnicreate'
 end
