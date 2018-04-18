@@ -19,9 +19,10 @@ class UsersController < ApplicationController
 
   def home  #maybe just grab the last few here rather than in view?
     @user = current_user
-    @workouts = Workout.all
-    @exercises = Exercise.all
-    @users = User.all
+    # .last(5).reverse
+    @workouts = Workout.last(5).reverse
+    @exercises = Exercise.last(10).reverse
+    @users = User.last(10).reverse
   end
 
   def show
