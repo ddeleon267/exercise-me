@@ -1,20 +1,14 @@
 <!-- move this back into index? not sure -->
 <h2>Filter exercises:</h2>
 <%= form_tag("/exercises", method: "get") do %>
-<!-- <form action="/exercises" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="✓"> -->
-
   <%= select_tag "muscle_group", options_for_select(["", "Glutes", "Abdominals", "Chest", "Quadriceps", "Hamstrings", "Calves", "Back", "Shoulders", "Biceps", "Triceps", "Multiple"]) %>
-  <!-- <select name="muscle_group" id="muscle_group"><option value=""></option> -->
-  <!-- <option value="Glutes">Glutes</option> -->
-  <!-- etc etc-->
   <%= submit_tag "Filter" %>
-  <!-- <input type="submit" name="commit" value="Filter" data-disable-with="Filter"> -->
 <% end %>
 
-<% exercises.each do |e| %>
-  <ul> <%= link_to "#{e.name}", exercise_path(e) %>
-    <li><%= e.muscle_group %></li>
-    <li><%= e.equipment %></li>
-    <li><%= e.description %></li>
+<% exercises.each do |exercise| %>
+  <ul> <%= link_to "#{exercise.name}", exercise_path(exercise) %>
+    <li><%= exercise.muscle_group %></li>
+    <li><%= exercise.equipment %></li>
+    <li><%= exercise.description %></li>
   </ul>
 <% end %>

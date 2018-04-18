@@ -12,6 +12,7 @@ class ExercisesController < ApplicationController
   end
 
   def index
+    #maybe express this condition more eloquently
      if !params[:muscle_group].blank?
        @exercises = Exercise.muscle_group(params[:muscle_group])
        ##look at the sql here?
@@ -39,6 +40,8 @@ class ExercisesController < ApplicationController
 
     def exercise_params
     	params.require(:exercise).permit(:name, :muscle_group, :equipment, :description)
+      #is the equipment attribute currently in the form? could also try implementing a view
+      #for exerises that don't require equipment? could maybe change to a boolean vs. string.
     end
 
     def set_exercise

@@ -1,6 +1,7 @@
 <!-- Don't know if i love how the nav links display here-->
 <h1>Log In<h2>
 
+<!-- not sure how this error will display -->
 <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "fields_with_errors") if flash[:error] %>
 <%= form_for @user, url: login_path, method: :post do |f| %>
     <%= f.label :name %>
