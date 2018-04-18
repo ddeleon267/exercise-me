@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def home
+  def home  #maybe just grab the last few here rather than in view?
     @user = current_user
     @workouts = Workout.all
     @exercises = Exercise.all

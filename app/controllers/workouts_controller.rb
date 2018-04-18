@@ -29,6 +29,7 @@ class WorkoutsController < ApplicationController
     # @workout.user_id = current_user.id
     #
     # @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
+
     @workout = current_user.workouts.build(workout_params)
     #maybe try to clean this up
     if @workout.save
@@ -41,7 +42,7 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    ##will break if workout is not found 
+    ##will break if workout is not found
     @current_user = current_user
     #do i need to modify this some way bc of the nested resource???
     if params[:user_id]

@@ -6,7 +6,7 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.new
   end
 
-  def create
+  def create 
     @exercise = Exercise.new(exercise_params)
     @exercise.save ? (redirect_to exercise_path(@exercise)) : (render :new)
   end

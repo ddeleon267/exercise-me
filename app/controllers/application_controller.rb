@@ -19,20 +19,9 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_if_unauthorized
-    ##specifically this is intended to protect a user's workouts.
-    ##a user should not be able to use nested url path to 'hack'; i.e. tro try to
-    ##create, edit, or destroy another user's workout.
     unauth_user_access = params[:user_id] && current_user.id != params[:user_id].to_i
     unauth_workout_access = params[:id] && !current_user.workouts.map(&:id).include?(params[:id].to_i)
-    ##should not be able to use unnested route to do this either
+
     redirect_to home_path if unauth_user_access || unauth_workout_access
   end
 end
-
-#examples to test
-## workouts/1/edit --- good
-## workouts/2/edit ---- good
-## workout edit button on show page-- good
-## users/28/workouts/2/edit --- good
-## users/27/workouts/2/edit --- good
-## users/28/workouts/1/edit --- good
