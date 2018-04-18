@@ -6,16 +6,14 @@ class ExercisesController < ApplicationController
     @exercise = Exercise.new
   end
 
-  def create 
+  def create
     @exercise = Exercise.new(exercise_params)
     @exercise.save ? (redirect_to exercise_path(@exercise)) : (render :new)
   end
 
   def index
-    #maybe express this condition more eloquently
      if !params[:muscle_group].blank?
        @exercises = Exercise.muscle_group(params[:muscle_group])
-       ##look at the sql here?
      else
        @exercises = Exercise.all
      end
