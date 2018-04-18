@@ -7,8 +7,8 @@
   <%= f.label "Primary Muscle Group" %>
   <%= f.select "muscle_group", options_for_select(["", "Glutes", "Abdominals", "Chest", "Quadriceps", "Hamstrings", "Calves", "Back", "Shoulders", "Biceps", "Triceps", "Multiple"]) %>
   <br>
-  <%= f.label :equipment %>
-  <%= f.text_field :equipment %><br>
+  <%= f.label :equipment_needed? %>
+  <%= f.check_box :equipment %><br>
 
   <%= f.label :description %>
   <%= f.text_field :description %><br>
