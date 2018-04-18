@@ -9,6 +9,11 @@ class Workout < ApplicationRecord
   validates :description, length: { maximum: 200, too_long: "%{count} characters is the maximum allowed" }
 
   accepts_nested_attributes_for :workout_exercises, :reject_if => proc { |attr| attr[:sets].blank? || attr[:reps].blank? || attr[:exercise_attributes][:name].blank? }
+
+  def user_name
+    self.user.name
+  end
+
 end
 
 #When you enable nested attributes an attribute writer is defined on the model.
