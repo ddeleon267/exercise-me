@@ -4,10 +4,10 @@
   <p>No workouts have been added by this user.<p>
 <% else %>
   <% @workouts.each do |w| %>
-    <ul><%= link_to w.name, workout_path(w) %>- <%= last_updated w %></li>
+    <ul><%= link_to w.name, workout_path(w) %>- <%= last_updated(w) %></li>
     <li><%= w.description %></li>
     <li><%= w.notes %></li>
-    <li><%= link_to w.user.name, user_workouts_path(w.user) %></li>
+    <li><%= link_to w.user_name, user_workouts_path(w.user) %></li>
     </ul>
   <% end %>
 <% end %>

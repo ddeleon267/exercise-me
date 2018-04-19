@@ -2,16 +2,16 @@
   <%= render partial: "layouts/errors", locals: { object: @exercise } %>
 
   <%= f.label :name %>
-  <%= f.text_field :name %><br>
-
+  <%= f.text_field :name %>
+  <br>
   <%= f.label "Primary Muscle Group" %>
   <%= f.select "muscle_group", options_for_select(["", "Glutes", "Abdominals", "Chest", "Quadriceps", "Hamstrings", "Calves", "Back", "Shoulders", "Biceps", "Triceps", "Multiple"]) %>
   <br>
   <%= f.label :equipment_needed? %>
-  <%= f.check_box :equipment %><br>
-
+  <%= f.check_box :equipment %>
+  <br>
   <%= f.label :description %>
-  <%= f.text_field :description %><br>
-
+  <%= f.text_field :description %>
+  <br>
   <%= f.submit %>
 <% end %>

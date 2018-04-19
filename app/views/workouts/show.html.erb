@@ -10,11 +10,9 @@
 <p> Date: <%= workout_date @workout %></p>
 <p><%= last_updated @workout %></p>
 <p> Exercises:</p>
-<!-- equipment??? -->
-
 
 <% @workout.workout_exercises.each do |workout_exercise| %>
-  <ul><%= workout_exercise.exercise.name if workout_exercise.exercise  %>
+  <ul><%= link_to workout_exercise.exercise.name, exercise_path(workout_exercise.exercise) if workout_exercise.exercise  %>
     <!-- would be great to link to each of these exercises -->
     <li>Sets: <%= workout_exercise.sets %></li>
     <li>Reps: <%= workout_exercise.reps %></li>

@@ -13,4 +13,5 @@ class WorkoutExercise < ApplicationRecord
       end
     end
   end
+  
 end
