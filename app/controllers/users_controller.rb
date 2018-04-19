@@ -17,24 +17,23 @@ class UsersController < ApplicationController
     end
   end
 
-  def home  #maybe just grab the last few here rather than in view?
+  def home
     @user = current_user
-    # .last(5).reverse
     @workouts = Workout.last(5).reverse
     @exercises = Exercise.last(10).reverse
     @users = User.last(10).reverse
   end
 
   def show
-    @user_workouts = @user.workouts #maybe this should be in the model?
+    @user_workouts = @user.workouts
   end
 
   def edit
     redirect_to root_path unless @user.id == current_user.id
   end
 
-  def update #might choose to redirect to profile page
-    @user.update(user_params) ? (redirect_to home_path) : (render :edit)
+  def update
+    @user.update(user_params) ? (redirect_to user_path(@user)) : (render :edit)
   end
 
   def destroy
