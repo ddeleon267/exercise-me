@@ -32,7 +32,6 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-    ##will break if workout is not found
     @current_user = current_user
 
     if params[:user_id]
@@ -78,7 +77,6 @@ class WorkoutsController < ApplicationController
       params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[],
       workout_exercises_attributes: [:sets, :reps, exercise_attributes: [:name]])
       #unsure if i need exercise ids
-      #hopefully i didn't just break this
     end
 
     def set_workout
