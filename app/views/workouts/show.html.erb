@@ -1,21 +1,21 @@
 <h1>Workout: <%= @workout.name %></h1>
 
 <% if @workout.user == current_user %>
-<%= link_to "Edit This Workout", edit_user_workout_path(@workout.user, @workout) %> | <%= link_to "Delete This Workout", user_workout_path(current_user, @workout), method: :delete, data: {confirm: "Are you sure you want to delete this workout?"} %>
+  <%= link_to "Edit This Workout", edit_user_workout_path(@workout.user, @workout) %> |
+  <%= link_to "Delete This Workout", user_workout_path(current_user, @workout), method: :delete, data: {confirm: "Are you sure you want to delete this workout?"} %>
 <% end %>
 
-<p> Added by: <%= link_to @workout.user.name, user_path(@workout.user) if @workout.user %></p>
+<p> Added by: <%= link_to @workout.user_name, user_path(@workout.user) if @workout.user %></p>
 <p> Workout Description: <%= @workout.description %></p>
 <p> Notes: <%= @workout.notes %></p>
 <p> Date: <%= workout_date @workout %></p>
 <p><%= last_updated @workout %></p>
 <p> Exercises:</p>
 
-<% @workout.workout_exercises.each do |workout_exercise| %>
-  <ul><%= link_to workout_exercise.exercise.name, exercise_path(workout_exercise.exercise) if workout_exercise.exercise  %>
-    <!-- would be great to link to each of these exercises -->
-    <li>Sets: <%= workout_exercise.sets %></li>
-    <li>Reps: <%= workout_exercise.reps %></li>
+<% @workout.workout_exercises.each do |we| %>
+  <ul><%= link_to we.exercise.name, exercise_path(we.exercise) if we.exercise  %>
+    <li>Sets: <%= we.sets %></li>
+    <li>Reps: <%= we.reps %></li>
     <!-- add another atttribute, like weight???-->
   </ul>
 <% end %>

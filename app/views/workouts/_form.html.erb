@@ -7,15 +7,15 @@
 
     <fieldset>
     <h3>Exercises</h3>
-    <%= f.fields_for :workout_exercises do |workout_exercise| %>
-        <%= workout_exercise.fields_for :exercise do |exercise| %>
-            <%= exercise.label :name %>
-            <%= exercise.text_field :name %>
+    <%= f.fields_for :workout_exercises do |we| %>
+        <%= we.fields_for :exercise do |e| %>
+            <%= e.label :name %>
+            <%= e.text_field :name %>
         <% end %>
-    <%= workout_exercise.label :sets %>
-    <%= workout_exercise.text_field :sets %>
-    <%= workout_exercise.label :reps %>
-    <%= workout_exercise.text_field :reps %><br><br>
+    <%= we.label :sets %>
+    <%= we.text_field :sets %>
+    <%= we.label :reps %>
+    <%= we.text_field :reps %><br><br>
     <% end %>
     </fieldset><br>
 
