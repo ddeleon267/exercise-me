@@ -17,9 +17,9 @@ The WorkoutExercise model (join table) has attributes of sets and reps; both can
 
 - [x] Include reasonable validations for simple model objects (list of model objects with validations e.g. User, Recipe, Ingredient, Item)
 User (presence, length, and uniqueness of name, password;  presence, length, and confirmation of password, uniqueness of email);
-Workout (presence of name);
+Workout (presence and length of name, presence and length of description, presence of date);
 Workout_exercise (presence of sets, reps);
-Exercise (presence and uniqueness of name, presence of muscle group)
+Exercise (presence, length, and uniqueness of name)
 
 - [x] Include a class level ActiveRecord scope method (model object & class method name and URL to see the working feature e.g. User.most_recipes URL: /users/most_recipes)
 Exercise.muscle_group URL: /exercises

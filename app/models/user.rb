@@ -11,7 +11,6 @@ class User < ApplicationRecord
   validates :password, confirmation: true
 
   def self.find_or_create_from_auth_hash(auth_hash)
-    binding.pry
     user = where(uid: auth_hash.uid).first_or_create
 
     user.name = auth_hash[:info][:nickname]

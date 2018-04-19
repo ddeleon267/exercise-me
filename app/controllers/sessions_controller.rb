@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       session[:user_id] = @user.id
       redirect_to home_path
     else
-      @user = User.new(name: session_params[:name]) 
+      @user = User.new(name: session_params[:name])
       flash[:error] = "Username and password don't match"
       render :new
     end
@@ -32,7 +32,6 @@ class SessionsController < ApplicationController
   private
 
     def auth_hash
-      binding.pry
       request.env['omniauth.auth']
     end
 
