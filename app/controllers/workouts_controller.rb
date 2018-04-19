@@ -8,7 +8,7 @@ class WorkoutsController < ApplicationController
       set_user
       @user.nil? ? (redirect_to home_path) : (@workouts = @user.workouts)
     else
-      @workouts = Workout.all
+      @workouts = Workout.all.reverse
     end
   end
 
