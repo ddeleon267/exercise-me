@@ -13,48 +13,32 @@ class WorkoutsController < ApplicationController
   end
 
   def new
-    #could maybe redo this second condition
     if params[:user_id] && !User.exists?(params[:user_id])
       redirect_to new_workout_path
     else
       @workout = Workout.new(user_id: params[:user_id])
-      # @exercises = @workout.exercises.build
       build_exercises
-      #could play around with a pry in here
     end
   end
 
   def create
-    # @workout = Workout.new(workout_params)
-    # @workout.user_id = current_user.id
-    #
-    # @workout.save ? (redirect_to workout_path(@workout)) : (render :new)
-
     @workout = current_user.workouts.build(workout_params)
-    #maybe try to clean this up
     if @workout.save
       redirect_to workout_path(@workout)
     else
       build_exercises
-      #or at least refactor this
-      render 'new'
+      render :new
     end
   end
 
   def show
     ##will break if workout is not found
     @current_user = current_user
-    #do i need to modify this some way bc of the nested resource???
+
     if params[:user_id]
       set_user
       set_user_workout if @user
       (@workout.nil? && @user) ? (redirect_to user_workouts_path(@user)) : (set_workout)
-
-      # if @workout.nil? && @user
-      #   redirect_to user_workouts_path(@user) #need alert
-      # else
-      #   set_workout #need alert
-      # end
     else
       set_workout
     end
