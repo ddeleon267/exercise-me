@@ -43,5 +43,5 @@ class ExercisesController < ApplicationController
     def set_exercise
       @exercise = Exercise.find(params[:id])
     end
-    
+
 end
