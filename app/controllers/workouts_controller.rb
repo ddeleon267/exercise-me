@@ -27,7 +27,6 @@ class WorkoutsController < ApplicationController
     if @workout.save
       redirect_to workout_path(@workout)
     else
-      build_exercises
       render :new
     end
   end
