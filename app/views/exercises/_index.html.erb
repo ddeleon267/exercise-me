@@ -4,10 +4,10 @@
   <%= submit_tag "Filter" %>
 <% end %>
 
-<% exercises.each do |e| %>
-  <ul> <%= link_to e.name, exercise_path(e) %>
-    <li>Primary Muscle Group Targeted: <%= e.muscle_group %></li>
-    <li>Equipment Needed? <%= e.equipment %></li>
-    <li>Description: <%= e.description %></li>
+<% exercises.each do |exercise| %>
+  <ul> <%= link_to exercise.name, exercise_path(exercise) %>
+    <li>Primary Muscle Group Targeted: <%= exercise.muscle_group %></li>
+    <li>Equipment Needed? <%= exercise.equipment %></li>
+    <li>Description: <%= exercise.description %></li>
   </ul>
 <% end %>

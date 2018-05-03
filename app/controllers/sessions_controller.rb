@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       redirect_to home_path
     else
       @user = User.new(name: session_params[:name])
-      flash[:error] = "Username and password don't match"
+      flash[:error] = "Invalid username or password"
       render :new
     end
   end
@@ -36,7 +36,7 @@ class SessionsController < ApplicationController
     end
 
     def session_params
-      params.require(:user).permit(:password, :name, :uid) #do i need uid here?
+      params.require(:user).permit(:password, :name, :uid)
     end
 
 end

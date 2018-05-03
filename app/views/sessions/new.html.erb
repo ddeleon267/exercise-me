@@ -1,7 +1,7 @@
 <h1>Log In<h2>
 
-<!-- not sure how this error will display -->
 <%= content_tag(:div, flash[:error], :id => "flash_error", :class => "fields_with_errors") if flash[:error] %>
+
 <%= form_for @user, url: login_path, method: :post do |f| %>
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -10,5 +10,4 @@
     <%= f.password_field :password %>
     <br>
     <%= f.submit "log in" %>
-  </div>
 <% end %>

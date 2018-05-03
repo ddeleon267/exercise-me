@@ -12,10 +12,9 @@
 <p><%= last_updated @workout %></p>
 <p> Exercises:</p>
 
-<% @workout.workout_exercises.each do |we| %>
-  <ul><%= link_to we.exercise.name, exercise_path(we.exercise) if we.exercise  %>
-    <li>Sets: <%= we.sets %></li>
-    <li>Reps: <%= we.reps %></li>
-    <!-- add another atttribute, like weight???-->
+<% @workout.workout_exercises.each do |workout_exercise| %>
+  <ul><%= link_to workout_exercise.exercise.name, exercise_path(workout_exercise.exercise) if workout_exercise.exercise %>
+    <li>Sets: <%= workout_exercise.sets %></li>
+    <li>Reps: <%= workout_exercise.reps %></li>
   </ul>
 <% end %>

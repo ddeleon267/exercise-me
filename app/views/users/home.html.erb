@@ -4,10 +4,10 @@
 
 <h3>Recently Added Workouts From the Community</h3>
 <% unless @workouts.empty? %>
-  <% @workouts.each do |w| %>
-    <% user = (@current_user.id == w.user_id) ? "you" : w.user_name %>
-      <ul><%= link_to w.name, workout_path(w) %>
-        <li>Added by <%= link_to w.user_name, user_path(w.user) %></li>
+  <% @workouts.each do |workout| %>
+    <% user = (@current_user.id == workout.user_id) ? "you" : workout.user_name %>
+      <ul><%= link_to workout.name, workout_path(workout) %>
+        <li>Added by <%= link_to workout.user_name, user_path(workout.user) %></li>
       </ul>
   <% end %>
 <% end %>
@@ -15,8 +15,8 @@
 <h3>Recently Added Exercises</h3>
 <% unless @exercises.empty? %>
   <ul>
-    <% @exercises.each do |e| %>
-      <li><%= link_to e.name, exercise_path(e) %></li>
+    <% @exercises.each do |exercise| %>
+      <li><%= link_to exercise.name, exercise_path(exercise) %></li>
     <% end %>
   </ul>
 <% end %>
@@ -24,8 +24,8 @@
 <h3>Explore New Users!</h3>
 <% unless @users.empty? %>
   <ul>
-    <% @users.each do |u| %>
-      <li><%= link_to u.name, user_path(u) %></a></li>
+    <% @users.each do |user| %>
+      <li><%= link_to user.name, user_path(user) %></a></li>
     <% end %>
   </ul>
 <% end %>

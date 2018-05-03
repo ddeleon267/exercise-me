@@ -1,6 +1,5 @@
 class Workout < ApplicationRecord
   belongs_to :user
-
   has_many :workout_exercises
   has_many :exercises, through: :workout_exercises
 
@@ -15,5 +14,3 @@ class Workout < ApplicationRecord
   end
 
 end
-
-#When you enable nested attributes an attribute writer is defined on the model.

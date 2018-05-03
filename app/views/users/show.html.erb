@@ -7,10 +7,10 @@ User since <%= date_joined @user %>
 <% if @user_workouts.empty? %>
   <p> <%= @user.name %> has not added any workouts yet!<p>
 <% else %>
-  <% @user_workouts.reverse.each do |w| %>
-    <ul>Workout Name: <%= link_to w.name, workout_path(w) %></a>
-      <% w.exercises.each do |e| %>
-        <li><%= e.name %></li>
+  <% @user_workouts.reverse.each do |workout| %>
+    <ul>Workout Name: <%= link_to workout.name, workout_path(workout) %></a>
+      <% workout.exercises.each do |exercise| %>
+        <li><%= exercise.name %></li>
       <% end %>
     </ul>
   <% end %>

@@ -14,7 +14,7 @@ class WorkoutsController < ApplicationController
 
   def new
     if params[:user_id] && !User.exists?(params[:user_id])
-      redirect_to new_workout_path
+      redirect_to home_path
     else
       @workout = Workout.new(user_id: params[:user_id])
       build_exercises
@@ -22,6 +22,7 @@ class WorkoutsController < ApplicationController
   end
 
   def create
+
     @workout = current_user.workouts.build(workout_params)
     if @workout.save
       redirect_to workout_path(@workout)
@@ -33,7 +34,6 @@ class WorkoutsController < ApplicationController
 
   def show
     @current_user = current_user
-
     if params[:user_id]
       set_user
       set_user_workout if @user
@@ -74,9 +74,9 @@ class WorkoutsController < ApplicationController
     end
 
     def workout_params
-      params.require(:workout).permit(:name, :description, :notes, :date, :user_id, exercise_ids:[],
-      workout_exercises_attributes: [:sets, :reps, exercise_attributes: [:name]])
-      #unsure if i need exercise ids
+      params.require(:workout).permit(:name, :description, :notes, :date, exercise_ids:[],
+        workout_exercises_attributes: [:sets, :reps,
+        exercise_attributes: [:name]])
     end
 
     def set_workout
