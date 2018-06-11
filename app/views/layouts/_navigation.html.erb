@@ -3,7 +3,7 @@
    <% if logged_in? %>
     <%= link_to "Home", home_path %>
     <%= link_to "Add a New Exercise", new_exercise_path %>
-    <%= link_to "View all Exercises", exercises_path %>
+    <%= link_to "View all Exercises", exercises_path, class: "all_exercises" %>
     <%= link_to "Add a New Workout", new_workout_path %>
     <%= link_to "View all Workouts", workouts_path %>
     <%= link_to "View Profile", user_path(session[:user_id]) %>
