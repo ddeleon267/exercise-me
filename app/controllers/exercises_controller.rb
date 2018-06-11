@@ -19,6 +19,11 @@ class ExercisesController < ApplicationController
     else
       @exercises = Exercise.all
     end
+
+    respond_to do |f|
+      f.html
+      f.json {render json: @exercises}
+    end
   end
 
   def show
