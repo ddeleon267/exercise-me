@@ -11,7 +11,8 @@ const bindClickHandlers = () => {
        $('#app-container').html('')
        exercises.forEach((exercise) =>{
          let newExercise = new Exercise(exercise)
-         console.log(newExercise)
+         let exerciseHtml = newExercise.formatIndex()
+         $("#app-container").append(exerciseHtml)
        })
      })
 
@@ -24,4 +25,12 @@ function Exercise(exercise) {
   this.id = exercise.id
   this.name = exercise.name
   this.muscle_group = exercise.muscle_group
+}
+
+//add prototype method
+Exercise.prototype.formatIndex = function() {
+  let exerciseHtml = `
+    <h1>${this.name}</h1>
+  `
+  return exerciseHtml
 }
