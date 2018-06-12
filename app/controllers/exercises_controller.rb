@@ -1,7 +1,7 @@
 class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
-  before_action :require_logged_in
-
+  # before_action :require_logged_in
+  # commented out because it was causing errors when fetching
   def new
     @exercise = Exercise.new
   end
