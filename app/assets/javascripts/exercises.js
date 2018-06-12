@@ -20,6 +20,10 @@ const bindClickHandlers = () => {
   })
 }
 
+  $(document).on("click", ".show_exercise", function(event) {
+    event.preventDefault()
+    fetch(`exercises.json`)
+  })
 //constructor function
 function Exercise(exercise) {
   //can always add other attrs later
@@ -31,7 +35,7 @@ function Exercise(exercise) {
 //add prototype method
 Exercise.prototype.formatIndex = function() {
   let exerciseHtml = `
-    <a href="/exercises/${this.id}"><h1>${this.name}</h1></a>
+    <a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h1>${this.name}</h1></a>
   `
   return exerciseHtml
 }
