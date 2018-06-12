@@ -5,6 +5,7 @@ $(() => {
 const bindClickHandlers = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
+     history.pushState(null, null, "exercises")
      fetch(`/exercises.json`)
      .then((response) => response.json())
      .then((exercises) => {
