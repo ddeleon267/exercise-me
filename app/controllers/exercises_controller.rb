@@ -27,6 +27,10 @@ class ExercisesController < ApplicationController
   end
 
   def show
+    respond_to do |f|
+      f.html
+      f.json {render json: @exercise}
+    end
   end
 
   def edit

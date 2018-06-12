@@ -31,7 +31,7 @@ function Exercise(exercise) {
 //add prototype method
 Exercise.prototype.formatIndex = function() {
   let exerciseHtml = `
-    <h1>${this.name}</h1>
+    <a href="/exercises/${this.id}"><h1>${this.name}</h1></a>
   `
   return exerciseHtml
 }
