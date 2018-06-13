@@ -22,7 +22,15 @@ const bindClickHandlers = () => {
 
   $(document).on("click", ".show_exercise", function(event) {
     event.preventDefault()
-    fetch(`exercises.json`)
+    $("#app-container").html("")
+    let id = $(this).attr("data-id")
+    fetch(`/exercises/${id}.json`)
+     .then((response) => response.json())
+     .then((exercise) => {
+       let newExercise = new Exercise(exercise)
+       let exerciseHtml = newExercise.formatShow()
+       $("#app-container").append(exerciseHtml)
+     })
   })
 //constructor function
 function Exercise(exercise) {
@@ -36,6 +44,14 @@ function Exercise(exercise) {
 Exercise.prototype.formatIndex = function() {
   let exerciseHtml = `
     <a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h1>${this.name}</h1></a>
+  `
+  return exerciseHtml
+}
+
+//add prototype method
+Exercise.prototype.formatShow = function() {
+  let exerciseHtml = `
+    <h3>${this.name}</ht>
   `
   return exerciseHtml
 }
