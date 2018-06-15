@@ -35,6 +35,7 @@ $(document).on("click", ".show_exercise", function(event) {
   event.preventDefault()
   $("#app-container").html("")
   let id = $(this).attr("data-id")
+  history.pushState(null, null, `exercises/${id}`)
   getExercise(id)
 })
 
