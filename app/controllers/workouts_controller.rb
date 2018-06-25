@@ -40,6 +40,11 @@ class WorkoutsController < ApplicationController
     else
       set_workout
     end
+
+    respond_to do |f|
+      f.html
+      f.json {render json: @workout}
+    end
   end
 
   def edit
