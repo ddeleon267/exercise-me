@@ -1,13 +1,10 @@
 $(document).on('turbolinks:load', function(){
-  bindClickHandlers();
+  addExerciseIndexListener();
+  addExerciseShowListeners();
 });
 
-// $(document).on('turbolinks:load', function(){
-// 	cocktailListeners();
-// 	commentListeners();
-// });
-
-const bindClickHandlers = () => {
+// add listeners
+const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
      history.pushState(null, null, "exercises")
@@ -15,6 +12,18 @@ const bindClickHandlers = () => {
   })
 }
 
+const addExerciseShowListeners = () => {
+  $(document).on("click", ".show_exercise", function(event) {
+    event.preventDefault()
+    $("#app-container").html("")
+
+    let id = $(this).attr("data-id")
+    history.pushState(null, null, `exercises/${id}`)
+    getExercise(id)
+  })
+}
+
+// get exercise data from api
 const getExercises = () => {
   fetch(`/exercises.json`)
   .then((response) => response.json())
@@ -38,26 +47,18 @@ const getExercise = (id) => {
    })
 }
 
-$(document).on("click", ".show_exercise", function(event) {
-  event.preventDefault()
-  $("#app-container").html("")
-  alert("Boo!")
-  console.log(this)
-  let id = $(this).attr("data-id")
-  history.pushState(null, null, `exercises/${id}`)
-  getExercise(id)
-})
-
-//constructor function
+//constructor function for exercise objects
 function Exercise(exercise) {
   //can always add other attrs later
   this.id = exercise.id
+
   this.name = exercise.name
   this.muscle_group = exercise.muscle_group
 }
 
-//add prototype methods
+//add prototype methods for an exercise
 Exercise.prototype.formatIndex = function() {
+  // debugger
   let exerciseHtml = `
     <a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h1>${this.name}</h1></a>
   `
