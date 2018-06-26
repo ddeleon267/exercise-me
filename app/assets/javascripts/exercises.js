@@ -1,4 +1,11 @@
-$(() => bindClickHandlers())
+$(document).on('turbolinks:load', function(){
+  bindClickHandlers();
+});
+
+// $(document).on('turbolinks:load', function(){
+// 	cocktailListeners();
+// 	commentListeners();
+// });
 
 const bindClickHandlers = () => {
   $('a.all_exercises').on('click', (event) => {
@@ -34,6 +41,8 @@ const getExercise = (id) => {
 $(document).on("click", ".show_exercise", function(event) {
   event.preventDefault()
   $("#app-container").html("")
+  alert("Boo!")
+  console.log(this)
   let id = $(this).attr("data-id")
   history.pushState(null, null, `exercises/${id}`)
   getExercise(id)
