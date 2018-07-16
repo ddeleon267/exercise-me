@@ -9,7 +9,16 @@ class ExercisesController < ApplicationController
 
   def create
     @exercise = Exercise.new(exercise_params)
-    @exercise.save ? (redirect_to exercise_path(@exercise)) : (render :new)
+
+    # if @exercise.save
+    #   render json: @exercise, status: 201
+    # else
+    #   render :new
+    # end
+    @exercise.valid? ? (render json: @exercise, status: 201) : (render :new)
+
+    # @exercise.save ? (redirect_to exercise_path(@exercise)) : (render :new)
+    # render json: @exercise, status: 201
   end
 
   def index
