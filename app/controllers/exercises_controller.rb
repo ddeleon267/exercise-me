@@ -24,6 +24,7 @@ class ExercisesController < ApplicationController
   def index
     if !params[:muscle_group].blank?
       @exercises = Exercise.muscle_group(params[:muscle_group])
+    # for implementing filter for equipment_needed?
     # elsif !params[:equipment_needed].blank?
     #   @exercises = Exercise.equipment_needed(params[:equipment_needed])
     else

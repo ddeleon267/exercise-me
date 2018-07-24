@@ -1,4 +1,4 @@
-<%= form_for(@exercise) do |f| %>
+<%= form_for(@exercise, html: {class: "newexercise"}) do |f| %>
   <%= render partial: "layouts/errors", locals: { object: @exercise } %>
 
   <%= f.label :name %>

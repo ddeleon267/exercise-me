@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load', function(){
   addExerciseIndexListener();
   addExerciseShowListeners();
-  // hijackExerciseForm();
+  hijackExerciseForm();
 });
 
 // // add listeners
@@ -25,21 +25,21 @@ const addExerciseShowListeners = () => {
 }
 
 // need to fix this so it only targets the form i want
-// const hijackExerciseForm = () => {
-//   $('form').submit(function(event) {
-//     //prevent form from submitting the default way
-//     event.preventDefault();
-//     // alert("we r hack3rz");
-//     var values = $(this).serialize();
-//     var posting = $.post('/exercises', values)
-//     posting.done(function(data) {
-//       var exercise = data;
-//       $("#exerciseName").text(exercise["name"]);
-//       // $("#exerciseBody").text(exercise["description"]);
-//     });
-//     // debugger
-//   });
-// }
+const hijackExerciseForm = () => {
+  $('#new_exercise').submit(function(event) {
+    //prevent form from submitting the default way
+    event.preventDefault();
+    alert("we r hack3rz");
+    var values = $(this).serialize();
+    var posting = $.post('/exercises', values)
+    posting.done(function(data) {
+      var exercise = data;
+      $("#exerciseName").text(exercise["name"]);
+      $("#exerciseBody").text(exercise["description"]);
+    });
+    // debugger
+  });
+}
 
 
 // get exercise data from api
