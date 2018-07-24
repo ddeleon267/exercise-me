@@ -29,13 +29,12 @@ const hijackExerciseForm = () => {
   $('#new_exercise').submit(function(event) {
     //prevent form from submitting the default way
     event.preventDefault();
-    alert("we r hack3rz");
     var values = $(this).serialize();
     var posting = $.post('/exercises', values)
     posting.done(function(data) {
-      var exercise = data;
-      $("#exerciseName").text(exercise["name"]);
-      $("#exerciseBody").text(exercise["description"]);
+      let newExercise = new Exercise(data)
+      $("#exerciseName").text(newExercise.name);
+      $("#exerciseBody").text(newExercise.description);
     });
     // debugger
   });
@@ -72,6 +71,7 @@ function Exercise(exercise) {
   this.id = exercise.id
 
   this.name = exercise.name
+  this.description = exercise.description
   this.muscle_group = exercise.muscle_group
 }
 
