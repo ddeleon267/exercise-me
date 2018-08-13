@@ -1,6 +1,7 @@
 $(document).on('turbolinks:load', function(){
   addExerciseIndexListener();
   addExerciseShowListeners();
+  addWorkoutShowListener();
   hijackExerciseForm();
 });
 
@@ -8,10 +9,21 @@ $(document).on('turbolinks:load', function(){
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
+
      history.pushState(null, null, "exercises")
      getExercises()
   })
 }
+
+
+////
+const addWorkoutShowListener = () => {
+  $('a.show_workout').on('click', (event) => {
+    alert("Boo!")
+  })
+}
+
+///
 
 const addExerciseShowListeners = () => {
   $(document).on("click", ".show_exercise", function(event) {

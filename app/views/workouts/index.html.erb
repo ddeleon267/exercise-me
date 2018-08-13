@@ -4,7 +4,7 @@
   <p>No workouts have been added by this user.<p>
 <% else %>
   <% @workouts.each do |workout| %>
-    <ul><%= link_to workout.name, workout_path(workout) %>- <%= last_updated(workout) %></li>
+    <ul><%= link_to workout.name, workout_path(workout), class: "show_workout" %>- <%= last_updated(workout) %></li>
     <li><%= workout.description %></li>
     <li><%= workout.notes %></li>
     <li><%= link_to workout.user_name, user_path(workout.user) %></li>
