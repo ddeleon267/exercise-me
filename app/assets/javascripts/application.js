@@ -14,3 +14,11 @@
 //= require rails-ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).on('turbolinks:load', function(){
+  addExerciseIndexListener();
+  addExerciseShowListeners();
+  addWorkoutShowListener();
+  
+  hijackExerciseForm();
+});

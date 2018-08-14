@@ -1,11 +1,4 @@
-$(document).on('turbolinks:load', function(){
-  addExerciseIndexListener();
-  addExerciseShowListeners();
-  addWorkoutShowListener();
-  hijackExerciseForm();
-});
-
-// // add listeners
+// add listener for exercise index action
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
@@ -15,16 +8,7 @@ const addExerciseIndexListener = () => {
   })
 }
 
-
-////
-const addWorkoutShowListener = () => {
-  $('a.show_workout').on('click', (event) => {
-    alert("Boo!")
-  })
-}
-
-///
-
+// add listener for exercise show action
 const addExerciseShowListeners = () => {
   $(document).on("click", ".show_exercise", function(event) {
     event.preventDefault()
@@ -36,11 +20,11 @@ const addExerciseShowListeners = () => {
   })
 }
 
-// need to fix this so it only targets the form i want
+// hijack exercise form submit
 const hijackExerciseForm = () => {
   $('#new_exercise').submit(function(event) {
-    //prevent form from submitting the default way
     event.preventDefault();
+
     var values = $(this).serialize();
     var posting = $.post('/exercises', values)
     posting.done(function(data) {
@@ -48,12 +32,10 @@ const hijackExerciseForm = () => {
       $("#exerciseName").text(newExercise.name);
       $("#exerciseBody").text(newExercise.description);
     });
-    // debugger
   });
 }
 
-
-// get exercise data from api
+// get exercises data from api
 const getExercises = () => {
   fetch(`/exercises.json`)
   .then((response) => response.json())
@@ -67,6 +49,7 @@ const getExercises = () => {
   })
 }
 
+// get exercise data from api
 const getExercise = (id) => {
   fetch(`/exercises/${id}.json`)
    .then((response) => response.json())
