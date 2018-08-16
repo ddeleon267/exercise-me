@@ -1,14 +1,12 @@
-// add listener for exercise index action
+// add listeners
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
-
-     history.pushState(null, null, "exercises")
+     history.pushState(null, null, "exercises") //this is being a pain
      getExercises()
   })
 }
 
-// add listener for exercise show action
 const addExerciseShowListeners = () => {
   $(document).on("click", ".show_exercise", function(event) {
     event.preventDefault()
@@ -18,6 +16,31 @@ const addExerciseShowListeners = () => {
     history.pushState(null, null, `exercises/${id}`)
     getExercise(id)
   })
+}
+
+// get all exercise data from api
+const getExercises = () => {
+  fetch(`/exercises.json`)
+  .then((response) => response.json())
+  .then((exercises) => {
+    $('#app-container').html('')
+    exercises.forEach((exercise) => {
+      let newExercise = new Exercise(exercise)
+      let exerciseHtml = newExercise.formatIndex()
+      $("#app-container").append(exerciseHtml)
+    })
+  })
+}
+
+// get chosen exercise data from api
+const getExercise = (id) => {
+  fetch(`/exercises/${id}.json`)
+   .then((response) => response.json())
+   .then((exercise) => {
+     let newExercise = new Exercise(exercise)
+     let exerciseHtml = newExercise.formatShow()
+     $("#app-container").append(exerciseHtml)
+   })
 }
 
 // hijack exercise form submit
@@ -35,36 +58,9 @@ const hijackExerciseForm = () => {
   });
 }
 
-// get exercises data from api
-const getExercises = () => {
-  fetch(`/exercises.json`)
-  .then((response) => response.json())
-  .then((exercises) => {
-    $('#app-container').html('')
-    exercises.forEach((exercise) =>{
-      let newExercise = new Exercise(exercise)
-      let exerciseHtml = newExercise.formatIndex()
-      $("#app-container").append(exerciseHtml)
-    })
-  })
-}
-
-// get exercise data from api
-const getExercise = (id) => {
-  fetch(`/exercises/${id}.json`)
-   .then((response) => response.json())
-   .then((exercise) => {
-     let newExercise = new Exercise(exercise)
-     let exerciseHtml = newExercise.formatShow()
-     $("#app-container").append(exerciseHtml)
-   })
-}
-
 //constructor function for exercise objects
 function Exercise(exercise) {
-  //can always add other attrs later
   this.id = exercise.id
-
   this.name = exercise.name
   this.description = exercise.description
   this.muscle_group = exercise.muscle_group
@@ -72,7 +68,6 @@ function Exercise(exercise) {
 
 //add prototype methods for an exercise
 Exercise.prototype.formatIndex = function() {
-  // debugger
   let exerciseHtml = `
     <a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h1>${this.name}</h1></a>
   `

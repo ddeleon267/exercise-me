@@ -1,8 +1,4 @@
-// need workout constructor function
-// add workout prototype methods
-
-
-// add listener for exercise index action
+// add listeners
 const addWorkoutIndexListener = () => {
   $('a.all_workouts').on('click', (event) => {
      event.preventDefault()
@@ -10,7 +6,17 @@ const addWorkoutIndexListener = () => {
   })
 }
 
-// get exercises data from api
+const addWorkoutShowListeners = () => {
+  $(document).on("click", ".show_workout", function(event) {
+    event.preventDefault()
+    $("#app-container").html("")
+
+    let id = $(this).attr("data-id")
+    getWorkout(id)
+  })
+}
+
+// get all exercise data from api
 const getWorkouts = () => {
   fetch(`/workouts.json`)
   .then((response) => response.json())
@@ -24,31 +30,7 @@ const getWorkouts = () => {
   })
 }
 
-
-const addWorkoutShowListeners = () => {
-  $(document).on("click", ".show_workout", function(event) {
-    event.preventDefault()
-    $("#app-container").html("")
-
-    let id = $(this).attr("data-id")
-
-    getWorkout(id)
-    alert("Boo!")
-  })
-}
-
-// const addExerciseShowListeners = () => {
-//   $(document).on("click", ".show_exercise", function(event) {
-//     event.preventDefault()
-//     $("#app-container").html("")
-//
-//     let id = $(this).attr("data-id")
-//     history.pushState(null, null, `exercises/${id}`)
-//     getExercise(id)
-//   })
-// }
-
-//working on dis
+// get chosen workout data from api
 const getWorkout = (id) => {
   fetch(`/workouts/${id}.json`)
    .then((response) => response.json())
@@ -58,10 +40,9 @@ const getWorkout = (id) => {
      $("#app-container").append(workoutHtml)
    })
 }
-//
+
 //constructor function for workout objects
 function Workout(workout) {
-  //can always add other attrs later
   this.id = workout.id
   this.name = workout.name
   this.description = workout.description
@@ -73,7 +54,6 @@ Workout.prototype.formatIndex = function() {
   `
   return workoutHtml
 }
-
 
 Workout.prototype.formatShow = function() {
   let workoutHtml = `
