@@ -18,7 +18,8 @@
 $(document).on('turbolinks:load', function(){
   addExerciseIndexListener();
   addExerciseShowListeners();
-  addWorkoutShowListener();
-  
+  addWorkoutIndexListener();
+  addWorkoutShowListeners();
+
   hijackExerciseForm();
 });
