@@ -2,7 +2,7 @@
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
-     history.pushState(null, null, "exercises") //this is being a pain
+     //history.pushState(null, null, "exercises") //this is being a pain
      getExercises()
   })
 }
@@ -13,7 +13,7 @@ const addExerciseShowListeners = () => {
     $("#app-container").html("")
 
     let id = $(this).attr("data-id")
-    history.pushState(null, null, `exercises/${id}`)
+    // history.pushState(null, null, `exercises/${id}`)
     getExercise(id)
   })
 }
@@ -76,7 +76,7 @@ Exercise.prototype.formatIndex = function() {
 
 Exercise.prototype.formatShow = function() {
   let exerciseHtml = `
-    <h3>${this.name}</ht>
+    <h3>${this.name}</h3>
   `
   return exerciseHtml
 }

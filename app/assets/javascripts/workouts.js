@@ -37,6 +37,7 @@ const getWorkout = (id) => {
    .then((workout) => {
      let newWorkout = new Workout(workout)
      let workoutHtml = newWorkout.formatShow() ///
+     $("#app-container").empty()
      $("#app-container").append(workoutHtml)
    })
 }
@@ -57,7 +58,8 @@ Workout.prototype.formatIndex = function() {
 
 Workout.prototype.formatShow = function() {
   let workoutHtml = `
-    <h3>${this.name}</ht>
+    <h3>${this.name}</h3>
+    <h3>${this.description}</h3>
   `
   return workoutHtml
 }
