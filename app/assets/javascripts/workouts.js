@@ -36,7 +36,7 @@ const getWorkout = (id) => {
    .then((response) => response.json())
    .then((workout) => {
      let newWorkout = new Workout(workout)
-     let workoutHtml = newWorkout.formatShow()
+     let workoutHtml = newWorkout.formatShow() ///
      $("#app-container").empty()
      $("#app-container").append(workoutHtml)
    })
@@ -47,7 +47,8 @@ function Workout(workout) {
   this.id = workout.id
   this.name = workout.name
   this.description = workout.description
-  this.workoutExercises = workout.workoutExercises
+  this.workout_exercises = workout.workout_exercises
+
 }
 
 Workout.prototype.formatIndex = function() {
@@ -63,11 +64,11 @@ Workout.prototype.formatShow = function() {
     <h3> Workout description: ${this.description}</h3>
   `
 
-  this.workoutExercises.forEach(workoutExercise => {
-    workoutHtml += `
-      <h4> Exercise Name: ${workoutExercise.exercise.name}</h4>
-      <p> Sets: ${workoutExercise.sets}</p>
-      <p>Reps: ${workoutExercise.reps}</p>
+  this.workout_exercises.forEach(function(element) {
+    workoutHtml+= `
+      <h4> Exercise Name: ${element.exercise.name}</h4>
+      <p> Sets: ${element.sets}</p>
+      <p>Reps: ${element.reps}</p>
     `
   })
   return workoutHtml
