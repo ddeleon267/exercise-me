@@ -39,6 +39,7 @@ const getExercise = (id) => {
    .then((exercise) => {
      let newExercise = new Exercise(exercise)
      let exerciseHtml = newExercise.formatShow()
+     $("#app-container").empty()
      $("#app-container").append(exerciseHtml)
    })
 }

@@ -44,14 +44,13 @@ const getWorkout = (id) => {
 
 //constructor function for workout objects
 function Workout(workout) {
-
   this.id = workout.id
   this.name = workout.name
   this.description = workout.description
   this.workoutExercises = workout.workout_exercises
-
 }
 
+//workout prototype methods
 Workout.prototype.formatIndex = function() {
   let workoutHtml = `
     <a href="/workouts/${this.id}" data-id="${this.id}" class="show_workout"><h1>${this.name}</h1></a>
@@ -65,7 +64,7 @@ Workout.prototype.formatShow = function() {
     <h3> Workout description: ${this.description}</h3>
   `
 
-  this.workoutExercises.forEach(function(workoutExercise) {
+  this.workoutExercises.forEach((workoutExercise) => {
     workoutHtml+= `
       <h4> Exercise Name: ${workoutExercise.exercise.name}</h4>
       <p> Sets: ${workoutExercise.sets}</p>
