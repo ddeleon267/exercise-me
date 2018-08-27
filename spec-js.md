@@ -5,6 +5,8 @@ Or maybe i just need to standardize the formatting?
 
 -still want to be able to edit and delete things from show. what do?
 
+-- add some attributes to spice up
+-- fix workout edit -- cannot add exercise?
 -->
 
 
