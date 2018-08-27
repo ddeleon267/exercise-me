@@ -64,13 +64,16 @@ function Exercise(exercise) {
   this.id = exercise.id
   this.name = exercise.name
   this.description = exercise.description
-  this.muscle_group = exercise.muscle_group
+  this.muscleGroup = exercise.muscle_group
 }
 
 //add prototype methods for an exercise
 Exercise.prototype.formatIndex = function() {
   let exerciseHtml = `
-    <a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h1>${this.name}</h1></a>
+    <ul><a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h4>${this.name}</h4></a>
+      <li> Primary Muscle Group: ${this.muscleGroup}</li>
+      <li> Description: ${this.description}</li>
+    </ul>
   `
   return exerciseHtml
 }
