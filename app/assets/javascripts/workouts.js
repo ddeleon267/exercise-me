@@ -57,6 +57,9 @@ function Workout(workout) {
 Workout.prototype.formatIndex = function() {
   let workoutHtml = `
     <a href="/workouts/${this.id}" data-id="${this.id}" class="show_workout"><h1>${this.name}</h1></a>
+    <p>Description: ${this.description}</p>
+    <p>Notes: ${this.notes}</p>
+    <p>Added by: ${this.userName}</p>
   `
   return workoutHtml
 }
