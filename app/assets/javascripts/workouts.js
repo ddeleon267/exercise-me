@@ -75,7 +75,7 @@ Workout.prototype.formatShow = function() {
 
   this.workoutExercises.forEach((workoutExercise) => {
     workoutHtml+= `
-      <h4> Exercise Name: ${workoutExercise.exercise.name}</h4>
+      <h4> Exercise Name: ${workoutExercise.exercise ? workoutExercise.exercise.name : "Untitled"}</h4>
       <p> Sets: ${workoutExercise.sets}</p>
       <p>Reps: ${workoutExercise.reps}</p>
     `

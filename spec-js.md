@@ -1,11 +1,9 @@
 # Specifications for the Rails with jQuery Assessment
 <!--
+-Need some security in js so that users can only edit their own workouts
+-- add some attributes to spice up
 - Maybe i want workout and index show to only show up via jquery?
 Or maybe i just need to standardize the formatting?
-
--still want to be able to edit and delete things from show. what do?
-
--- add some attributes to spice up
 -- fix workout edit -- cannot add exercise?
 -->
 
