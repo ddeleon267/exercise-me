@@ -65,6 +65,7 @@ function Exercise(exercise) {
   this.name = exercise.name
   this.description = exercise.description
   this.muscleGroup = exercise.muscle_group
+  this.equipmentNeeded = exercise.equipment
 }
 
 //add prototype methods for an exercise
@@ -85,6 +86,7 @@ Exercise.prototype.formatShow = function() {
     <a data-confirm="Are you sure you want to delete this exercise?" rel="nofollow" data-method="delete" href="/exercises/${this.id}"> <p>Delete this exercise</p> </a>
     <p> Primary Muscle Group: ${this.muscleGroup}</p>
     <p> Description: ${this.description}</p>
+    <p> Equipment Needed? : ${this.equipmentNeeded}</p>
   `
   return exerciseHtml
 }
