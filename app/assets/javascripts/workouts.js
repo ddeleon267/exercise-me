@@ -68,6 +68,9 @@ Workout.prototype.formatShow = function() {
   let workoutHtml = `
     <h3> Workout Name: ${this.name}</h3>
     <h3> Workout description: ${this.description}</h3>
+    <a href="/workouts/${this.id}/edit"><h4>Edit this workout</h4></a>
+    <a data-confirm="Are you sure you want to delete this workout?" rel="nofollow" data-method="delete" href="/workouts/${this.id}"> <p>Delete this workout</p> </a>
+
   `
 
   this.workoutExercises.forEach((workoutExercise) => {
