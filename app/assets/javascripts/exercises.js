@@ -2,7 +2,7 @@
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
-     //history.pushState(null, null, "exercises") //this is being a pain
+     history.replaceState(null, null, "exercises")
      getExercises()
   })
 }
@@ -13,7 +13,7 @@ const addExerciseShowListeners = () => {
     $("#app-container").html("")
 
     let id = $(this).attr("data-id")
-    // history.pushState(null, null, `exercises/${id}`)
+    history.replaceState(null, null, `exercises/${id}`)
     getExercise(id)
   })
 }
