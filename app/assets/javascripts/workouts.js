@@ -48,6 +48,9 @@ function Workout(workout) {
   this.name = workout.name
   this.description = workout.description
   this.workoutExercises = workout.workout_exercises
+  this.notes = workout.notes
+  this.updatedAt = workout.updated_at
+  this.userName = workout.user_name
 }
 
 //workout prototype methods

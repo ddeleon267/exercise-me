@@ -73,7 +73,7 @@ Exercise.prototype.formatIndex = function() {
   let exerciseHtml = `
     <ul><a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h4>${this.name}</h4></a>
       <li> Primary Muscle Group: ${this.muscleGroup}</li>
-      <li> Description: ${this.description}</li>
+      <li> Equipment Needed? : ${this.equipmentNeeded}</li>
     </ul>
   `
   return exerciseHtml
