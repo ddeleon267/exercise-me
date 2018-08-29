@@ -2,7 +2,7 @@
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
-     history.replaceState(null, null, "exercises")
+     //history.replaceState(null, null, "exercises")
      getExercises()
   })
 }
@@ -13,7 +13,7 @@ const addExerciseShowListeners = () => {
     $("#app-container").html("")
 
     let id = $(this).attr("data-id")
-    history.replaceState(null, null, `exercises/${id}`)
+    //history.replaceState(null, null, `exercises/${id}`)
     getExercise(id)
   })
 }
@@ -37,8 +37,8 @@ const getExercise = (id) => {
   fetch(`/exercises/${id}.json`)
    .then((response) => response.json())
    .then((exercise) => {
-     let newExercise = new Exercise(exercise)
-     let exerciseHtml = newExercise.formatShow()
+     const newExercise = new Exercise(exercise)
+     const exerciseHtml = newExercise.formatShow()
      $("#app-container").empty()
      $("#app-container").append(exerciseHtml)
    })
@@ -49,23 +49,26 @@ const hijackExerciseForm = () => {
   $('#new_exercise').submit(function(event) {
     event.preventDefault();
 
-    var values = $(this).serialize();
-    var posting = $.post('/exercises', values)
+    const values = $(this).serialize();
+    const posting = $.post('/exercises', values)
     posting.done(function(data) {
-      let newExercise = new Exercise(data)
+      const newExercise = new Exercise(data)
       $("#exerciseName").text(newExercise.name);
       $("#exerciseBody").text(newExercise.description);
+      $('#new_exercise').trigger('reset')
     });
   });
 }
 
 //constructor function for exercise objects
-function Exercise(exercise) {
-  this.id = exercise.id
-  this.name = exercise.name
-  this.description = exercise.description
-  this.muscleGroup = exercise.muscle_group
-  this.equipmentNeeded = exercise.equipment
+class Exercise {
+  constructor(exercise) {
+    this.id = exercise.id
+    this.name = exercise.name
+    this.description = exercise.description
+    this.muscleGroup = exercise.muscle_group
+    this.equipmentNeeded = exercise.equipment
+  }
 }
 
 //add prototype methods for an exercise

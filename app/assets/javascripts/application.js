@@ -20,6 +20,5 @@ $(document).on('turbolinks:load', function(){
   addExerciseShowListeners();
   addWorkoutIndexListener();
   addWorkoutShowListeners();
-
   hijackExerciseForm();
 });
