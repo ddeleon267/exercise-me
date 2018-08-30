@@ -15,7 +15,7 @@ class ExercisesController < ApplicationController
     # else
     #   render :new
     # end
-    @exercise.valid? ? (render json: @exercise, status: 201) : (render :new)
+    @exercise.save ? (render json: @exercise, status: 201) : (render :new)
 
     # @exercise.save ? (redirect_to exercise_path(@exercise)) : (render :new)
     # render json: @exercise, status: 201
