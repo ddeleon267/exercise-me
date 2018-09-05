@@ -1,9 +1,4 @@
 # Specifications for the Rails with jQuery Assessment
-<!--
-- Maybe i want workout and index show to only show up via jquery?
-Or maybe i just need to standardize the formatting?
--- fix workout edit -- cannot add exercise?
--->
 
 Specs:
 - [x] Use jQuery for implementing new requirements
