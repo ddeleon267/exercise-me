@@ -12,7 +12,7 @@ const addExerciseShowListeners = () => {
     event.preventDefault()
     $("#app-container").html("")
 
-    let id = $(this).attr("data-id")
+    const id = $(this).attr("data-id")
     //history.replaceState(null, null, `exercises/${id}`)
     getExercise(id)
   })
@@ -25,8 +25,8 @@ const getExercises = () => {
   .then((exercises) => {
     $('#app-container').html('')
     exercises.forEach((exercise) => {
-      let newExercise = new Exercise(exercise)
-      let exerciseHtml = newExercise.formatIndex()
+      const newExercise = new Exercise(exercise)
+      const exerciseHtml = newExercise.formatIndex()
       $("#app-container").append(exerciseHtml)
     })
   })
@@ -73,7 +73,7 @@ class Exercise {
 
 //add prototype methods for an exercise
 Exercise.prototype.formatIndex = function() {
-  let exerciseHtml = `
+  const exerciseHtml = `
     <ul><a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h4>${this.name}</h4></a>
       <li> Primary Muscle Group: ${this.muscleGroup}</li>
       <li> Equipment Needed? : ${this.equipmentNeeded}</li>
@@ -83,7 +83,7 @@ Exercise.prototype.formatIndex = function() {
 }
 
 Exercise.prototype.formatShow = function() {
-  let exerciseHtml = `
+  const exerciseHtml = `
     <h3>${this.name}</h3>
     <a href="/exercises/${this.id}/edit"><h4>Edit this exercise</h4>
     <a data-confirm="Are you sure you want to delete this exercise?" rel="nofollow" data-method="delete" href="/exercises/${this.id}"> <p>Delete this exercise</p> </a>
