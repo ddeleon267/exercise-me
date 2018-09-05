@@ -11,7 +11,7 @@ const addWorkoutShowListeners = () => {
     event.preventDefault()
     $("#app-container").html("")
 
-    let id = $(this).attr("data-id")
+    const id = $(this).attr("data-id")
     getWorkout(id)
   })
 }
@@ -23,8 +23,8 @@ const getWorkouts = () => {
   .then((workouts) => {
     $('#app-container').html('')
     workouts.forEach((workout) =>{
-      let newWorkout = new Workout(workout)
-      let workoutHtml = newWorkout.formatIndex()
+      const newWorkout = new Workout(workout)
+      const workoutHtml = newWorkout.formatIndex()
       $("#app-container").append(workoutHtml)
     })
   })
@@ -35,8 +35,8 @@ const getWorkout = (id) => {
   fetch(`/workouts/${id}.json`)
    .then((response) => response.json())
    .then((workout) => {
-     let newWorkout = new Workout(workout)
-     let workoutHtml = newWorkout.formatShow() ///
+     const newWorkout = new Workout(workout)
+     const workoutHtml = newWorkout.formatShow() ///
      $("#app-container").empty()
      $("#app-container").append(workoutHtml)
    })
@@ -57,7 +57,7 @@ class Workout {
 
 //workout prototype methods
 Workout.prototype.formatIndex = function() {
-  let workoutHtml = `
+  const workoutHtml = `
     <a href="/workouts/${this.id}" data-id="${this.id}" class="show_workout"><h1>${this.name}</h1></a>
     <p>Description: ${this.description}</p>
     <p>Notes: ${this.notes}</p>
