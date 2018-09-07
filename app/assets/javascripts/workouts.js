@@ -42,7 +42,7 @@ const getWorkout = (id) => {
    })
 }
 
-//constructor function for workout objects
+// Workout class
 class Workout {
   constructor(workout) {
     this.id = workout.id
@@ -53,34 +53,43 @@ class Workout {
     this.updatedAt = workout.updated_at
     this.userName = workout.user_name
   }
+
+  formatIndex(){
+    const workoutHtml = `
+      <a href="/workouts/${this.id}" data-id="${this.id}" class="show_workout"><h1>${this.name}</h1></a>
+      <p>Description: ${this.description}</p>
+      <p>Notes: ${this.notes}</p>
+      <p>Added by: ${this.userName}</p>
+    `
+    return workoutHtml
+  }
+
+  formatShow() {
+    let workoutHtml = `
+      <h3> Workout Name: ${this.name}</h3>
+      <h3> Workout description: ${this.description}</h3>
+      <a href="/workouts/${this.id}/edit"><h4>Edit this workout</h4></a>
+      <a data-confirm="Are you sure you want to delete this workout?" rel="nofollow" data-method="delete" href="/workouts/${this.id}"> <p>Delete this workout</p> </a>
+
+    `
+    this.workoutExercises.forEach((workoutExercise) => {
+      workoutHtml+= `
+        <h4> Exercise Name: ${workoutExercise.exercise ? workoutExercise.exercise.name : "Untitled"}</h4>
+        <p> Sets: ${workoutExercise.sets}</p>
+        <p>Reps: ${workoutExercise.reps}</p>
+      `
+    })
+    return workoutHtml
+  }
 }
 
 //workout prototype methods
-Workout.prototype.formatIndex = function() {
-  const workoutHtml = `
-    <a href="/workouts/${this.id}" data-id="${this.id}" class="show_workout"><h1>${this.name}</h1></a>
-    <p>Description: ${this.description}</p>
-    <p>Notes: ${this.notes}</p>
-    <p>Added by: ${this.userName}</p>
-  `
-  return workoutHtml
-}
-
-Workout.prototype.formatShow = function() {
-  let workoutHtml = `
-    <h3> Workout Name: ${this.name}</h3>
-    <h3> Workout description: ${this.description}</h3>
-    <a href="/workouts/${this.id}/edit"><h4>Edit this workout</h4></a>
-    <a data-confirm="Are you sure you want to delete this workout?" rel="nofollow" data-method="delete" href="/workouts/${this.id}"> <p>Delete this workout</p> </a>
-
-  `
-
-  this.workoutExercises.forEach((workoutExercise) => {
-    workoutHtml+= `
-      <h4> Exercise Name: ${workoutExercise.exercise ? workoutExercise.exercise.name : "Untitled"}</h4>
-      <p> Sets: ${workoutExercise.sets}</p>
-      <p>Reps: ${workoutExercise.reps}</p>
-    `
-  })
-  return workoutHtml
-}
+// Workout.prototype.formatIndex = function() {
+//   const workoutHtml = `
+//     <a href="/workouts/${this.id}" data-id="${this.id}" class="show_workout"><h1>${this.name}</h1></a>
+//     <p>Description: ${this.description}</p>
+//     <p>Notes: ${this.notes}</p>
+//     <p>Added by: ${this.userName}</p>
+//   `
+//   return workoutHtml
+// }
