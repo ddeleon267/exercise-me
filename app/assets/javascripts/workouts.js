@@ -82,14 +82,3 @@ class Workout {
     return workoutHtml
   }
 }
-
-//workout prototype methods
-// Workout.prototype.formatIndex = function() {
-//   const workoutHtml = `
-//     <a href="/workouts/${this.id}" data-id="${this.id}" class="show_workout"><h1>${this.name}</h1></a>
-//     <p>Description: ${this.description}</p>
-//     <p>Notes: ${this.notes}</p>
-//     <p>Added by: ${this.userName}</p>
-//   `
-//   return workoutHtml
-// }
