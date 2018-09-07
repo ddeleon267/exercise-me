@@ -69,27 +69,49 @@ class Exercise {
     this.muscleGroup = exercise.muscle_group
     this.equipmentNeeded = exercise.equipment
   }
+
+  formatIndex() {
+    const exerciseHtml = `
+      <ul><a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h4>${this.name}</h4></a>
+        <li> Primary Muscle Group: ${this.muscleGroup}</li>
+        <li> Equipment Needed? : ${this.equipmentNeeded}</li>
+      </ul>
+    `
+    return exerciseHtml
+  }
+
+  formatShow() {
+    const exerciseHtml = `
+      <h3>${this.name}</h3>
+      <a href="/exercises/${this.id}/edit"><h4>Edit this exercise</h4>
+      <a data-confirm="Are you sure you want to delete this exercise?" rel="nofollow" data-method="delete" href="/exercises/${this.id}"> <p>Delete this exercise</p> </a>
+      <p> Primary Muscle Group: ${this.muscleGroup}</p>
+      <p> Description: ${this.description}</p>
+      <p> Equipment Needed? : ${this.equipmentNeeded}</p>
+    `
+    return exerciseHtml
+  }
 }
 
 //add prototype methods for an exercise
-Exercise.prototype.formatIndex = function() {
-  const exerciseHtml = `
-    <ul><a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h4>${this.name}</h4></a>
-      <li> Primary Muscle Group: ${this.muscleGroup}</li>
-      <li> Equipment Needed? : ${this.equipmentNeeded}</li>
-    </ul>
-  `
-  return exerciseHtml
-}
+// Exercise.prototype.formatIndex = function() {
+//   const exerciseHtml = `
+//     <ul><a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h4>${this.name}</h4></a>
+//       <li> Primary Muscle Group: ${this.muscleGroup}</li>
+//       <li> Equipment Needed? : ${this.equipmentNeeded}</li>
+//     </ul>
+//   `
+//   return exerciseHtml
+// }
 
-Exercise.prototype.formatShow = function() {
-  const exerciseHtml = `
-    <h3>${this.name}</h3>
-    <a href="/exercises/${this.id}/edit"><h4>Edit this exercise</h4>
-    <a data-confirm="Are you sure you want to delete this exercise?" rel="nofollow" data-method="delete" href="/exercises/${this.id}"> <p>Delete this exercise</p> </a>
-    <p> Primary Muscle Group: ${this.muscleGroup}</p>
-    <p> Description: ${this.description}</p>
-    <p> Equipment Needed? : ${this.equipmentNeeded}</p>
-  `
-  return exerciseHtml
-}
+// Exercise.prototype.formatShow = function() {
+//   const exerciseHtml = `
+//     <h3>${this.name}</h3>
+//     <a href="/exercises/${this.id}/edit"><h4>Edit this exercise</h4>
+//     <a data-confirm="Are you sure you want to delete this exercise?" rel="nofollow" data-method="delete" href="/exercises/${this.id}"> <p>Delete this exercise</p> </a>
+//     <p> Primary Muscle Group: ${this.muscleGroup}</p>
+//     <p> Description: ${this.description}</p>
+//     <p> Equipment Needed? : ${this.equipmentNeeded}</p>
+//   `
+//   return exerciseHtml
+// }
