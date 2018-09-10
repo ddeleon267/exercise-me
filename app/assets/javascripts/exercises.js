@@ -2,18 +2,18 @@
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
      event.preventDefault()
-     //history.replaceState(null, null, "exercises")
+     //history.replaceState(null, null, 'exercises")
      getExercises()
   })
 }
 
 const addExerciseShowListeners = () => {
   // why/how does this work?
-  $(document).on("click", ".show_exercise", function(event) {
+  $(document).on('click', '.show_exercise', function(event) {
     event.preventDefault()
-    $("#app-container").html("")
+    $('#app-container').html('')
 
-    const id = $(this).attr("data-id")
+    const id = $(this).attr('data-id')
     //what is "this" here?
     //history.replaceState(null, null, `exercises/${id}`)
     getExercise(id)
@@ -50,7 +50,7 @@ const getExercises = () => {
     exercises.forEach((exercise) => {
       const newExercise = new Exercise(exercise)
       const exerciseHtml = newExercise.formatIndex()
-      $("#app-container").append(exerciseHtml)
+      $('#app-container').append(exerciseHtml)
     })
   })
 }
@@ -62,25 +62,25 @@ const getExercise = (id) => {
    .then((exercise) => {
      const newExercise = new Exercise(exercise)
      const exerciseHtml = newExercise.formatShow()
-     $("#app-container").empty()
-     $("#app-container").append(exerciseHtml)
+     $('#app-container').empty()
+     $('#app-container').append(exerciseHtml)
    })
 }
 
 // hijack exercise form submit
 const hijackExerciseForm = () => {
   $('#new_exercise').submit(function(event) {
-    event.preventDefault();
+    event.preventDefault()
 
-    const values = $(this).serialize();
+    const values = $(this).serialize()
     const posting = $.post('/exercises', values)
     posting.done(function(data) {// use arrow fn here?
       const newExercise = new Exercise(data)
-      $("#exerciseName").text(newExercise.name);
-      $("#exerciseBody").text(newExercise.description);
+      $('#exerciseName').text(newExercise.name)
+      $('#exerciseBody').text(newExercise.description)
       $('#new_exercise').trigger('reset')
-    });
-  });
+    })
+  })
 }
 
 //constructor function for exercise objects
@@ -106,8 +106,8 @@ class Exercise {
   formatShow() {
     const exerciseHtml = `
       <h3>${this.name}</h3>
-      <a href="/exercises/${this.id}/edit"><h4>Edit this exercise</h4>
-      <a data-confirm="Are you sure you want to delete this exercise?" rel="nofollow" data-method="delete" href="/exercises/${this.id}"> <p>Delete this exercise</p> </a>
+      <a href='/exercises/${this.id}/edit'><h4>Edit this exercise</h4>
+      <a data-confirm='Are you sure you want to delete this exercise?' rel='nofollow' data-method='delete' href='/exercises/${this.id}'> <p>Delete this exercise</p> </a>
       <p> Primary Muscle Group: ${this.muscleGroup}</p>
       <p> Description: ${this.description}</p>
       <p> Equipment Needed? : ${this.equipmentNeeded}</p>
