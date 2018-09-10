@@ -6,9 +6,8 @@
 <% end %>
 
 <% exercises.each do |exercise| %>
-  <ul> <%= link_to exercise.name, exercise_path(exercise) %>
-    <li>Primary Muscle Group Targeted: <%= exercise.muscle_group %></li>
+  <ul><h4><%= link_to exercise.name, exercise_path(exercise) %></h4>
+    <li>Primary Muscle Group: <%= exercise.muscle_group %></li>
     <li>Equipment Needed? <%= exercise.equipment %></li>
-    <li>Description: <%= exercise.description %></li>
   </ul>
 <% end %>
