@@ -24,21 +24,21 @@ const addExerciseShowListeners = () => {
 const getExercises = () => {
   let form =
     `<h2>Filter exercises:</h2>
-    <form action="/exercises" accept-charset="UTF-8" method="get">
-      <input name="utf8" type="hidden" value="✓">
-      <select name="muscle_group" id="muscle_group">
-        <option value=""></option>
-        <option value="Glutes">Glutes</option>
-        <option value="Abdominals">Abdominals</option>
-        <option value="Chest">Chest</option>
-        <option value="Quadriceps">Quadriceps</option>
-        <option value="Hamstrings">Hamstrings</option>
-        <option value="Calves">Calves</option>
-        <option value="Back">Back</option>
-        <option value="Shoulders">Shoulders</option>
-        <option value="Biceps">Biceps</option>
-        <option value="Triceps">Triceps</option>
-        <option value="Multiple">Multiple</option>
+    <form action='/exercises' accept-charset='UTF-8' method='get'>
+      <input name='utf8' type='hidden' value='✓'>
+      <select name='muscle_group' id='muscle_group'>
+        <option value=''></option>
+        <option value='Glutes'>Glutes</option>
+        <option value='Abdominals'>Abdominals</option>
+        <option value='Chest'>Chest</option>
+        <option value='Quadriceps'>Quadriceps</option>
+        <option value='Hamstrings'>Hamstrings</option>
+        <option value='Calves'>Calves</option>
+        <option value='Back'>Back</option>
+        <option value='Shoulders'>Shoulders</option>
+        <option value='Biceps'>Biceps</option>
+        <option value='Triceps'>Triceps</option>
+        <option value='Multiple'>Multiple</option>
       </select>
     <form/>`
   fetch(`/exercises.json`)
@@ -95,7 +95,7 @@ class Exercise {
 
   formatIndex() {
     const exerciseHtml = `
-      <ul><a href="/exercises/${this.id}" data-id="${this.id}" class="show_exercise"><h4>${this.name}</h4></a>
+      <ul><a href='/exercises/${this.id}' data-id='${this.id}' class='show_exercise'><h4>${this.name}</h4></a>
         <li> Primary Muscle Group: ${this.muscleGroup}</li>
         <li> Equipment Needed? : ${this.equipmentNeeded}</li>
       </ul>

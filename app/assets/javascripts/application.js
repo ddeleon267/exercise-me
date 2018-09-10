@@ -16,9 +16,9 @@
 //= require_tree .
 
 $(document).on('turbolinks:load', function(){
-  addExerciseIndexListener();
-  addExerciseShowListeners();
-  addWorkoutIndexListener();
-  addWorkoutShowListeners();
-  hijackExerciseForm();
-});
+  addExerciseIndexListener()
+  addExerciseShowListeners()
+  addWorkoutIndexListener()
+  addWorkoutShowListeners()
+  hijackExerciseForm()
+})  
