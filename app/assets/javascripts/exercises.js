@@ -8,11 +8,13 @@ const addExerciseIndexListener = () => {
 }
 
 const addExerciseShowListeners = () => {
+  // why/how does this work?
   $(document).on("click", ".show_exercise", function(event) {
     event.preventDefault()
     $("#app-container").html("")
 
     const id = $(this).attr("data-id")
+    //what is "this" here?
     //history.replaceState(null, null, `exercises/${id}`)
     getExercise(id)
   })
@@ -20,10 +22,31 @@ const addExerciseShowListeners = () => {
 
 // get all exercise data from api
 const getExercises = () => {
+  let form =
+    `<h2>Filter exercises:</h2>
+    <form action="/exercises" accept-charset="UTF-8" method="get">
+      <input name="utf8" type="hidden" value="✓">
+      <select name="muscle_group" id="muscle_group">
+        <option value=""></option>
+        <option value="Glutes">Glutes</option>
+        <option value="Abdominals">Abdominals</option>
+        <option value="Chest">Chest</option>
+        <option value="Quadriceps">Quadriceps</option>
+        <option value="Hamstrings">Hamstrings</option>
+        <option value="Calves">Calves</option>
+        <option value="Back">Back</option>
+        <option value="Shoulders">Shoulders</option>
+        <option value="Biceps">Biceps</option>
+        <option value="Triceps">Triceps</option>
+        <option value="Multiple">Multiple</option>
+      </select>
+    <form/>`
   fetch(`/exercises.json`)
   .then((response) => response.json())
   .then((exercises) => {
     $('#app-container').html('')
+    $('#app-container').append(form)
+
     exercises.forEach((exercise) => {
       const newExercise = new Exercise(exercise)
       const exerciseHtml = newExercise.formatIndex()
@@ -51,7 +74,7 @@ const hijackExerciseForm = () => {
 
     const values = $(this).serialize();
     const posting = $.post('/exercises', values)
-    posting.done(function(data) {
+    posting.done(function(data) {// use arrow fn here?
       const newExercise = new Exercise(data)
       $("#exerciseName").text(newExercise.name);
       $("#exerciseBody").text(newExercise.description);
@@ -91,4 +114,6 @@ class Exercise {
     `
     return exerciseHtml
   }
+
+  // could do a method/fn here to format form?
 }
