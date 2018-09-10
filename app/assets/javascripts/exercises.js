@@ -109,8 +109,8 @@ class Exercise {
       <a href='/exercises/${this.id}/edit'><h4>Edit this exercise</h4>
       <a data-confirm='Are you sure you want to delete this exercise?' rel='nofollow' data-method='delete' href='/exercises/${this.id}'> <p>Delete this exercise</p> </a>
       <p> Primary Muscle Group: ${this.muscleGroup}</p>
-      <p> Description: ${this.description}</p>
       <p> Equipment Needed? ${this.equipmentNeeded}</p>
+      <p> Description: ${this.description}</p>
     `
     return exerciseHtml
   }
