@@ -5,7 +5,7 @@ class Exercise {
     this.description = exercise.description;
     this.muscleGroup = exercise.muscle_group;
     this.equipmentNeeded = exercise.equipment;
-  }
+  };
 
   formatIndex() {
     const exerciseHtml = `
@@ -15,7 +15,7 @@ class Exercise {
       </ul>
     `
     return exerciseHtml;
-  }
+  };
 
   formatShow() {
     const exerciseHtml = `
@@ -32,7 +32,7 @@ class Exercise {
 
 // get data for all exercises from api
 // format index resource
-const getExercises = (muscleGroup = null) => {
+const getExercises = (muscle = null) => {
   const form =
     `<h2>Filter exercises:</h2>
     <form action='/exercises' accept-charset='UTF-8' method='get'>
@@ -54,12 +54,12 @@ const getExercises = (muscleGroup = null) => {
       <input type='submit' name='commit' value='Filter' class='filter' data-disable-with='Filter'>
     <form/>`
   fetch(`/exercises.json`)
-  .then((response) => response.json())
-  .then((exercises) => {
+  .then(response => response.json())
+  .then(exercises => {
     $('#app-container').empty();
     $('#app-container').append(form);
 
-    const matches = muscleGroup ? (exercises.filter(ex => ex.muscle_group === muscleGroup)) : exercises;
+    const matches = muscle ? (exercises.filter(ex => ex.muscle_group === muscle)) : exercises;
     matches.forEach(exercise => {
       const newExercise = new Exercise(exercise);
       const exerciseHTML = newExercise.formatIndex();
@@ -72,23 +72,23 @@ const getExercises = (muscleGroup = null) => {
 // format show resource
 const getExercise = (id) => {
   fetch(`/exercises/${id}.json`)
-   .then((response) => response.json())
-   .then((exercise) => {
-     const newExercise = new Exercise(exercise)
-     const exerciseHTML = newExercise.formatShow()
-     $('#app-container').empty()
-     $('#app-container').append(exerciseHTML)
-   })
-}
+   .then(response => response.json())
+   .then(exercise => {
+     const newExercise = new Exercise(exercise);
+     const exerciseHTML = newExercise.formatShow();
+     $('#app-container').empty();
+     $('#app-container').append(exerciseHTML);
+   });
+};
 
 // add listeners
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
-     event.preventDefault() // does nothing?
+     event.preventDefault(); // does nothing?
      //history.replaceState(null, null, 'exercises")
      getExercises();
   });
-}
+};
 
 const addExerciseShowListeners = () => {
   $(document).on('click', '.show_exercise', function(event) {
@@ -98,23 +98,23 @@ const addExerciseShowListeners = () => {
     $('#app-container').html('');
     getExercise(id);
   });
-}
+};
 
 const hijackFilterForm = () => {
   $('.filter').on('click', function(event) {
-    event.preventDefault();
-    alert("Boo!")
     const muscleGroup = $("#muscle_group").val();
+
+    event.preventDefault();
     getExercises(muscleGroup);
-  })
-}
+  });
+};
 
 const hijackExerciseForm = () => {
   $('#new_exercise').submit(function(event) {
-    event.preventDefault()
-
     const values = $(this).serialize();
     const posting = $.post('/exercises', values);
+
+    event.preventDefault();
     posting.done(data => {
       const newExercise = new Exercise(data);
       $('#exerciseName').text(newExercise.name);
