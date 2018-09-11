@@ -1,7 +1,6 @@
 class ExercisesController < ApplicationController
   before_action :set_exercise, only: [:show, :edit, :update, :destroy]
-  # before_action :require_logged_in
-  # commented out because it was causing errors when fetching
+  before_action :require_logged_in
 
   def new
     @exercise = Exercise.new
@@ -10,15 +9,11 @@ class ExercisesController < ApplicationController
   def create
     @exercise = Exercise.new(exercise_params)
     @exercise.save ? (render json: @exercise, status: 201) : (render :new)
-    # this will not work if you use .valid? instead of save
   end
 
   def index
     if !params[:muscle_group].blank?
       @exercises = Exercise.muscle_group(params[:muscle_group])
-    # for implementing filter for equipment_needed?
-    # elsif !params[:equipment_needed].blank?
-    #   @exercises = Exercise.equipment_needed(params[:equipment_needed])
     else
       @exercises = Exercise.all
     end
