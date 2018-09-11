@@ -7,6 +7,16 @@ const addExerciseIndexListener = () => {
   })
 }
 
+const hijackFilterForm = () => {
+  $('.filter').on('click', function(event) {
+    event.preventDefault()
+    alert("Boo!")
+    let muscleGroup = $("#muscle_group").val()
+    getExercises(muscleGroup)
+  })
+}
+
+
 const addExerciseShowListeners = () => {
   // why/how does this work?
   $(document).on('click', '.show_exercise', function(event) {
@@ -21,11 +31,11 @@ const addExerciseShowListeners = () => {
 }
 
 // get all exercise data from api
-const getExercises = () => {
+const getExercises = (muscleGroup) => {
   let form =
     `<h2>Filter exercises:</h2>
     <form action='/exercises' accept-charset='UTF-8' method='get'>
-      <input name='utf8' type='hidden' value='✓'>
+      <input class='filter' name='utf8' type='hidden' value='✓'>
       <select name='muscle_group' id='muscle_group'>
         <option value=''></option>
         <option value='Glutes'>Glutes</option>
@@ -40,6 +50,7 @@ const getExercises = () => {
         <option value='Triceps'>Triceps</option>
         <option value='Multiple'>Multiple</option>
       </select>
+      <input type='submit' name='commit' value='Filter' class='filter' data-disable-with='Filter'>
     <form/>`
   fetch(`/exercises.json`)
   .then((response) => response.json())
@@ -47,7 +58,9 @@ const getExercises = () => {
     $('#app-container').html('')
     $('#app-container').append(form)
 
-    exercises.forEach((exercise) => {
+    let matches = muscleGroup ? exercises.filter((ex) => ex.muscle_group === muscleGroup) : exercises
+
+    matches.forEach((exercise) => {
       const newExercise = new Exercise(exercise)
       const exerciseHtml = newExercise.formatIndex()
       $('#app-container').append(exerciseHtml)
@@ -66,6 +79,9 @@ const getExercise = (id) => {
      $('#app-container').append(exerciseHtml)
    })
 }
+
+
+
 
 // hijack exercise form submit
 const hijackExerciseForm = () => {

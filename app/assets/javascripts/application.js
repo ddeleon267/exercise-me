@@ -21,4 +21,5 @@ $(document).on('turbolinks:load', function(){
   addWorkoutIndexListener()
   addWorkoutShowListeners()
   hijackExerciseForm()
-})  
+  hijackFilterForm()
+})

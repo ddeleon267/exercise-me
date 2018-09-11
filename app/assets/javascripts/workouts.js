@@ -22,6 +22,7 @@ const getWorkouts = () => {
   .then((response) => response.json())
   .then((workouts) => {
     $('#app-container').html('')
+    $('#app-container').append(`<h1>Workouts</h1>`)
     workouts.forEach((workout) =>{
       const newWorkout = new Workout(workout)
       const workoutHtml = newWorkout.formatIndex()
@@ -50,16 +51,19 @@ class Workout {
     this.description = workout.description
     this.workoutExercises = workout.workout_exercises
     this.notes = workout.notes
-    this.updatedAt = workout.updated_at
     this.userName = workout.user_name
+    this.userId = workout.user_id
+    this.updatedAt = new Date(workout.updated_at).toString().replace(/ GMT.*/, '')
+
   }
 
   formatIndex(){
     const workoutHtml = `
-      <a href='/workouts/${this.id}' data-id='${this.id}' class='show_workout'><h1>${this.name}</h1></a>
-      <p>Description: ${this.description}</p>
-      <p>Notes: ${this.notes}</p>
-      <p>Added by: ${this.userName}</p>
+      <ul><h4>Workout Name: <a href='/workouts/${this.id}' data-id='${this.id}' class='show_workout'> ${this.name}</h4></a>
+      <li>${this.updatedAt}</li>
+      <li>Description: ${this.description}</li>
+      <li>Added by: <a href='/users/${this.userId}'>${this.userName}</a></li>
+      </ul>
     `
     return workoutHtml
   }
