@@ -1,7 +1,7 @@
 // add listeners
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
-     event.preventDefault()
+     event.preventDefault() // does nothing?
      //history.replaceState(null, null, 'exercises")
      getExercises()
   })
@@ -10,12 +10,11 @@ const addExerciseIndexListener = () => {
 const hijackFilterForm = () => {
   $('.filter').on('click', function(event) {
     event.preventDefault()
-    alert("Boo!")
+    alert("Boop!")
     let muscleGroup = $("#muscle_group").val()
     getExercises(muscleGroup)
   })
 }
-
 
 const addExerciseShowListeners = () => {
   // why/how does this work?

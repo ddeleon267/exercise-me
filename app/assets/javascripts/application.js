@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require_tree .
 
-$(document).on('turbolinks:load', function(){
+$(document).on('turbolinks:load', () => {
   addExerciseIndexListener()
   addExerciseShowListeners()
   addWorkoutIndexListener()
