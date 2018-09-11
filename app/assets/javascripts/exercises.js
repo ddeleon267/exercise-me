@@ -1,37 +1,39 @@
-// add listeners
-const addExerciseIndexListener = () => {
-  $('a.all_exercises').on('click', (event) => {
-     event.preventDefault() // does nothing?
-     //history.replaceState(null, null, 'exercises")
-     getExercises()
-  })
-}
+class Exercise {
+  constructor(exercise) {
+    this.id = exercise.id;
+    this.name = exercise.name;
+    this.description = exercise.description;
+    this.muscleGroup = exercise.muscle_group;
+    this.equipmentNeeded = exercise.equipment;
+  }
 
-const hijackFilterForm = () => {
-  $('.filter').on('click', function(event) {
-    event.preventDefault()
-    alert("Boop!")
-    let muscleGroup = $("#muscle_group").val()
-    getExercises(muscleGroup)
-  })
-}
+  formatIndex() {
+    const exerciseHtml = `
+      <ul><a href='/exercises/${this.id}' data-id='${this.id}' class='show_exercise'><h4>${this.name}</h4></a>
+        <li> Primary Muscle Group: ${this.muscleGroup}</li>
+        <li> Equipment Needed? ${this.equipmentNeeded}</li>
+      </ul>
+    `
+    return exerciseHtml;
+  }
 
-const addExerciseShowListeners = () => {
-  // why/how does this work?
-  $(document).on('click', '.show_exercise', function(event) {
-    event.preventDefault()
-    $('#app-container').html('')
+  formatShow() {
+    const exerciseHtml = `
+      <h3>${this.name}</h3>
+      <a href='/exercises/${this.id}/edit'><h4>Edit this exercise</h4>
+      <a data-confirm='Are you sure you want to delete this exercise?' rel='nofollow' data-method='delete' href='/exercises/${this.id}'> <p>Delete this exercise</p> </a>
+      <p> Primary Muscle Group: ${this.muscleGroup}</p>
+      <p> Equipment Needed? ${this.equipmentNeeded}</p>
+      <p> Description: ${this.description}</p>
+    `
+    return exerciseHtml;
+  };
+};
 
-    const id = $(this).attr('data-id')
-    //what is "this" here?
-    //history.replaceState(null, null, `exercises/${id}`)
-    getExercise(id)
-  })
-}
-
-// get all exercise data from api
-const getExercises = (muscleGroup) => {
-  let form =
+// get data for all exercises from api
+// format index resource
+const getExercises = (muscleGroup = null) => {
+  const form =
     `<h2>Filter exercises:</h2>
     <form action='/exercises' accept-charset='UTF-8' method='get'>
       <input class='filter' name='utf8' type='hidden' value='✓'>
@@ -54,80 +56,70 @@ const getExercises = (muscleGroup) => {
   fetch(`/exercises.json`)
   .then((response) => response.json())
   .then((exercises) => {
-    $('#app-container').html('')
-    $('#app-container').append(form)
+    $('#app-container').empty();
+    $('#app-container').append(form);
 
-    let matches = muscleGroup ? exercises.filter((ex) => ex.muscle_group === muscleGroup) : exercises
+    const matches = muscleGroup ? (exercises.filter(ex => ex.muscle_group === muscleGroup)) : exercises;
+    matches.forEach(exercise => {
+      const newExercise = new Exercise(exercise);
+      const exerciseHTML = newExercise.formatIndex();
+      $('#app-container').append(exerciseHTML);
+    });
+  });
+};
 
-    matches.forEach((exercise) => {
-      const newExercise = new Exercise(exercise)
-      const exerciseHtml = newExercise.formatIndex()
-      $('#app-container').append(exerciseHtml)
-    })
-  })
-}
-
-// get chosen exercise data from api
+// get data for individual exercise from api
+// format show resource
 const getExercise = (id) => {
   fetch(`/exercises/${id}.json`)
    .then((response) => response.json())
    .then((exercise) => {
      const newExercise = new Exercise(exercise)
-     const exerciseHtml = newExercise.formatShow()
+     const exerciseHTML = newExercise.formatShow()
      $('#app-container').empty()
-     $('#app-container').append(exerciseHtml)
+     $('#app-container').append(exerciseHTML)
    })
 }
 
+// add listeners
+const addExerciseIndexListener = () => {
+  $('a.all_exercises').on('click', (event) => {
+     event.preventDefault() // does nothing?
+     //history.replaceState(null, null, 'exercises")
+     getExercises();
+  });
+}
 
+const addExerciseShowListeners = () => {
+  $(document).on('click', '.show_exercise', function(event) {
+    const id = $(this).attr('data-id');
 
+    event.preventDefault();
+    $('#app-container').html('');
+    getExercise(id);
+  });
+}
 
-// hijack exercise form submit
+const hijackFilterForm = () => {
+  $('.filter').on('click', function(event) {
+    event.preventDefault();
+    alert("Boo!")
+    const muscleGroup = $("#muscle_group").val();
+    getExercises(muscleGroup);
+  })
+}
+
 const hijackExerciseForm = () => {
   $('#new_exercise').submit(function(event) {
     event.preventDefault()
 
-    const values = $(this).serialize()
-    const posting = $.post('/exercises', values)
-    posting.done(function(data) {// use arrow fn here?
-      const newExercise = new Exercise(data)
-      $('#exerciseName').text(newExercise.name)
-      $('#exerciseBody').text(newExercise.description)
-      $('#new_exercise').trigger('reset')
-    })
-  })
-}
-
-//constructor function for exercise objects
-class Exercise {
-  constructor(exercise) {
-    this.id = exercise.id
-    this.name = exercise.name
-    this.description = exercise.description
-    this.muscleGroup = exercise.muscle_group
-    this.equipmentNeeded = exercise.equipment
-  }
-
-  formatIndex() {
-    const exerciseHtml = `
-      <ul><a href='/exercises/${this.id}' data-id='${this.id}' class='show_exercise'><h4>${this.name}</h4></a>
-        <li> Primary Muscle Group: ${this.muscleGroup}</li>
-        <li> Equipment Needed? ${this.equipmentNeeded}</li>
-      </ul>
-    `
-    return exerciseHtml
-  }
-
-  formatShow() {
-    const exerciseHtml = `
-      <h3>${this.name}</h3>
-      <a href='/exercises/${this.id}/edit'><h4>Edit this exercise</h4>
-      <a data-confirm='Are you sure you want to delete this exercise?' rel='nofollow' data-method='delete' href='/exercises/${this.id}'> <p>Delete this exercise</p> </a>
-      <p> Primary Muscle Group: ${this.muscleGroup}</p>
-      <p> Equipment Needed? ${this.equipmentNeeded}</p>
-      <p> Description: ${this.description}</p>
-    `
-    return exerciseHtml
-  }
-
-}
+    const values = $(this).serialize();
+    const posting = $.post('/exercises', values);
+    posting.done(data => {
+      const newExercise = new Exercise(data);
+      $('#exerciseName').text(newExercise.name);
+      $('#exerciseBody').text(newExercise.description);
+      $('#new_exercise').trigger('reset');
+    });
+  });
+};
