@@ -1,48 +1,3 @@
-// add listeners
-const addWorkoutIndexListener = () => {
-  $('a.all_workouts').on('click', (event) => {
-     event.preventDefault()
-     getWorkouts()
-  })
-}
-
-const addWorkoutShowListeners = () => {
-  $(document).on('click', '.show_workout', function(event) {
-    event.preventDefault()
-    $('#app-container').html('')
-
-    const id = $(this).attr('data-id')
-    getWorkout(id)
-  })
-}
-
-// get all exercise data from api
-const getWorkouts = () => {
-  fetch('/workouts.json')
-  .then((response) => response.json())
-  .then((workouts) => {
-    $('#app-container').html('')
-    $('#app-container').append(`<h1>Workouts</h1>`)
-    workouts.forEach((workout) =>{
-      const newWorkout = new Workout(workout)
-      const workoutHtml = newWorkout.formatIndex()
-      $('#app-container').append(workoutHtml)
-    })
-  })
-}
-
-// get chosen workout data from api
-const getWorkout = (id) => {
-  fetch(`/workouts/${id}.json`)
-   .then((response) => response.json())
-   .then((workout) => {
-     const newWorkout = new Workout(workout)
-     const workoutHtml = newWorkout.formatShow() ///
-     $('#app-container').empty()
-     $('#app-container').append(workoutHtml)
-   })
-}
-
 // Workout class
 class Workout {
   constructor(workout) {
@@ -54,7 +9,6 @@ class Workout {
     this.userName = workout.user_name
     this.userId = workout.user_id
     this.updatedAt = new Date(workout.updated_at).toString().replace(/ GMT.*/, '')
-
   }
 
   formatIndex(){
@@ -80,9 +34,56 @@ class Workout {
       workoutHtml+= `
         <h4> Exercise Name: ${workoutExercise.exercise ? workoutExercise.exercise.name : 'Untitled'}</h4>
         <p> Sets: ${workoutExercise.sets}</p>
-        <p>Reps: ${workoutExercise.reps}</p>
+        <p> Reps: ${workoutExercise.reps}</p>
       `
     })
     return workoutHtml
   }
+}
+
+// get data for all workouts from api
+// format index resource
+const getWorkouts = () => {
+  fetch('/workouts.json')
+  .then((response) => response.json())
+  .then((workouts) => {
+    $('#app-container').html('')
+    $('#app-container').append(`<h1>Workouts</h1>`)
+    workouts.forEach((workout) =>{
+      const newWorkout = new Workout(workout)
+      const workoutHtml = newWorkout.formatIndex()
+      $('#app-container').append(workoutHtml)
+    })
+  })
+}
+
+// get data for individual exercise from api
+// format show resource
+const getWorkout = (id) => {
+  fetch(`/workouts/${id}.json`)
+   .then((response) => response.json())
+   .then((workout) => {
+     const newWorkout = new Workout(workout)
+     const workoutHtml = newWorkout.formatShow() ///
+     $('#app-container').empty()
+     $('#app-container').append(workoutHtml)
+   })
+}
+
+// add listeners
+const addWorkoutIndexListener = () => {
+  $('a.all_workouts').on('click', (event) => {
+     event.preventDefault()
+     getWorkouts()
+  })
+}
+
+const addWorkoutShowListeners = () => {
+  $(document).on('click', '.show_workout', function(event) {
+    event.preventDefault()
+    $('#app-container').html('')
+
+    const id = $(this).attr('data-id')
+    getWorkout(id)
+  })
 }
