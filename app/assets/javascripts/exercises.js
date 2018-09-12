@@ -56,6 +56,7 @@ const getExercises = (muscle = null) => {
   fetch(`/exercises.json`)
   .then(response => response.json())
   .then(exercises => {
+    debugger
     $('#app-container').empty();
     $('#app-container').append(form);
 
