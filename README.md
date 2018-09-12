@@ -4,10 +4,12 @@ Exercise-Me is a simple Rails app that allows users to create and share exercise
 
 # Getting Started- Prerequisites and Installation
 
+Note that this application has only been run on Rails 5.1.4 running Ruby 2.3.1
+
 To get a copy of the project up and running on your local machine for development and testing purposes:
 
-Fork this repo and clone it to your computer. Run 'bundle install'. Then migrate and seed the database with 'rake db:migrate' 'and rake db:seed'.
-Start the server with 'rails s' or 'rails server'
+Fork this repo and clone it to your computer, then cd into the directory and run 'bundle install'. Migrate and seed the database with 'rake db:migrate' 'and rake db:seed', then
+start the server with 'rails s' or 'rails server'.
 
 # Built with
 Rails, JQuery, Omniauth, SQLite
