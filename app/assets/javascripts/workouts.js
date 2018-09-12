@@ -7,13 +7,18 @@ class Workout {
     this.notes = workout.notes;
     this.userName = workout.user_name;
     this.userId = workout.user_id;
-    this.updatedAt = new Date(workout.updated_at).toString().replace(/ GMT.*/, '');
+    this.updatedAt = new Date(workout.updated_at);
   };
 
-  formatIndex(){
+  formatTime() {
+    return this.updatedAt.toString().replace(/ GMT.*/, '').split(" ").slice(0,4).join(" ")
+  }
+
+  formatIndex() {
+    const updatedAt = this.formatTime()
     const workoutHtml = `
-      <ul><h4>Workout Name: <a href='/workouts/${this.id}' data-id='${this.id}' class='show_workout'> ${this.name}</h4></a>
-      <li>${this.updatedAt}</li>
+      <ul><h4><a href='/workouts/${this.id}' data-id='${this.id}' class='show_workout'> ${this.name}</h4></a>
+      <li>Last updated: ${updatedAt}</li>
       <li>Description: ${this.description}</li>
       <li>Added by: <a href='/users/${this.userId}'>${this.userName}</a></li>
       </ul>
