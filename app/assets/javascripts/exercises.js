@@ -11,7 +11,7 @@ class Exercise {
     const exerciseHtml = `
       <ul><a href='/exercises/${this.id}' data-id='${this.id}' class='show_exercise'><h4>${this.name}</h4></a>
         <li> Primary Muscle Group: ${this.muscleGroup}</li>
-        <li> Equipment Needed? ${this.equipmentNeeded}</li>
+        <li> Equipment Needed? ${this.equipmentNeeded ? 'Yes' : 'No'}</li>
       </ul>
     `
     return exerciseHtml;
@@ -23,7 +23,7 @@ class Exercise {
       <a href='/exercises/${this.id}/edit'><h4>Edit this exercise</h4>
       <a data-confirm='Are you sure you want to delete this exercise?' rel='nofollow' data-method='delete' href='/exercises/${this.id}'> <p>Delete this exercise</p> </a>
       <p> Primary Muscle Group: ${this.muscleGroup}</p>
-      <p> Equipment Needed? ${this.equipmentNeeded}</p>
+      <p> Equipment Needed? ${this.equipmentNeeded ? 'Yes' : 'No'}</p>
       <p> Description: ${this.description}</p>
     `
     return exerciseHtml;
