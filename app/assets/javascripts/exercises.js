@@ -60,11 +60,16 @@ const getExercises = (muscle = null) => {
     $('#app-container').append(form);
 
     const matches = muscle ? (exercises.filter(ex => ex.muscle_group === muscle)) : exercises;
-    matches.forEach(exercise => {
-      const newExercise = new Exercise(exercise);
-      const exerciseHTML = newExercise.formatIndex();
-      $('#app-container').append(exerciseHTML);
-    });
+
+    if (matches.length > 0) {
+      matches.forEach(exercise => {
+        const newExercise = new Exercise(exercise);
+        const exerciseHTML = newExercise.formatIndex();
+        $('#app-container').append(exerciseHTML);
+      });
+    } else {
+        $('#app-container').append(`<h3>No Matching Exercises Were Found. Please try again!</h3>`)
+    };
   });
 };
 
