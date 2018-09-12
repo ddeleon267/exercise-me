@@ -90,8 +90,8 @@ const getExercise = (id) => {
 // add listeners
 const addExerciseIndexListener = () => {
   $('a.all_exercises').on('click', (event) => {
-     event.preventDefault(); // does nothing?
-     //history.replaceState(null, null, 'exercises")
+     event.preventDefault();
+     history.replaceState(null, null, 'exercises');
      getExercises();
   });
 };
@@ -101,6 +101,7 @@ const addExerciseShowListeners = () => {
     const id = $(this).attr('data-id');
 
     event.preventDefault();
+    history.replaceState(null, null, `exercises/${id}`);
     $('#app-container').html('');
     getExercise(id);
   });

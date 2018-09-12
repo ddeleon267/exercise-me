@@ -79,6 +79,7 @@ const getWorkout = (id) => {
 const addWorkoutIndexListener = () => {
   $('.all_workouts').on('click', (event) => {
      event.preventDefault();
+     history.replaceState(null, null, 'workouts');
      getWorkouts();
   });
 };
@@ -88,6 +89,7 @@ const addWorkoutShowListeners = () => {
     const id = $(this).attr('data-id');
 
     event.preventDefault();
+    history.replaceState(null, null, `workouts/${id}`);
     $('#app-container').empty();
     getWorkout(id);
   });
