@@ -3,10 +3,15 @@
   <%= select_tag "muscle_group", options_for_select(["", "Glutes", "Abdominals", "Chest", "Quadriceps", "Hamstrings", "Calves", "Back", "Shoulders", "Biceps", "Triceps", "Multiple"]) %>
   <%= submit_tag "Filter", :class => "filter" %>
 <% end %>
+<button id="alpha">Click Here to Alphabetize</button>
 
-<% exercises.each do |exercise| %>
-  <ul><h4><%= link_to exercise.name, exercise_path(exercise) %></h4>
-    <li>Primary Muscle Group: <%= exercise.muscle_group %></li>
-    <li>Equipment Needed? <%= exercise.equipment ? "Yes" : "No" %></li>
-  </ul>
-<% end %>
+<div id="exercises">
+  <% exercises.each do |exercise| %>
+    <div class="grab" data-name= "<%= exercise.name %>">
+      <ul><h4><%= link_to exercise.name, exercise_path(exercise) %></h4>
+        <li>Primary Muscle Group: <%= exercise.muscle_group %></li>
+        <li>Equipment Needed? <%= exercise.equipment ? "Yes" : "No" %></li>
+      </ul>
+    </div>
+  <% end %>
+<div>

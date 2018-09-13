@@ -9,10 +9,12 @@ class Exercise {
 
   formatIndex() {
     const exerciseHtml = `
-      <ul><a href='/exercises/${this.id}' data-id='${this.id}' class='show_exercise'><h4>${this.name}</h4></a>
-        <li> Primary Muscle Group: ${this.muscleGroup}</li>
-        <li> Equipment Needed? ${this.equipmentNeeded ? 'Yes' : 'No'}</li>
-      </ul>
+      <div class="grab" data-name='${this.name}'>
+        <ul><a href='/exercises/${this.id}' data-id='${this.id}' class='show_exercise'><h4>${this.name}</h4></a>
+          <li> Primary Muscle Group: ${this.muscleGroup}</li>
+          <li> Equipment Needed? ${this.equipmentNeeded ? 'Yes' : 'No'}</li>
+        </ul>
+      </div>
     `
     return exerciseHtml;
   };
@@ -52,21 +54,24 @@ const getExercises = (muscle = null) => {
         <option value='Multiple'>Multiple</option>
       </select>
       <input type='submit' name='commit' value='Filter' class='filter' data-disable-with='Filter'>
-    <form/>`
+    <form/>
+    <button id="alpha">Click Here to Alphabetize</button>
+    `
   fetch(`/exercises.json`)
   .then(response => response.json())
   .then(exercises => {
-    debugger
     $('#app-container').empty();
     $('#app-container').append(form);
+    $('#app-container').append(`<div id="exercises"></div>`)
 
-    const matches = muscle ? (exercises.filter(ex => ex.muscle_group === muscle)) : exercises;
+    let matches = muscle ? (exercises.filter(ex => ex.muscle_group === muscle)) : exercises;
+
 
     if (matches.length > 0) {
       matches.forEach(exercise => {
-        const newExercise = new Exercise(exercise);
-        const exerciseHTML = newExercise.formatIndex();
-        $('#app-container').append(exerciseHTML);
+      const newExercise = new Exercise(exercise);
+      const exerciseHTML = newExercise.formatIndex();
+      $('#exercises').append(exerciseHTML);
       });
     } else {
         $('#app-container').append(`<h3>No Matching Exercises Were Found. Please try again!</h3>`)
@@ -107,6 +112,28 @@ const addExerciseShowListeners = () => {
   });
 };
 
+const hijackAlphaButton = () => {
+  $(document).on('click', "#alpha", function(event) {
+    event.preventDefault()
+    alert("Boo!")
+    let divs = $(".grab")
+    let test = divs.sort(function(a, b) {
+      let nameA = a.dataset.name.toUpperCase(); // ignore upper and lowercase
+      var nameB = b.dataset.name.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      // names must be equal
+      return 0;
+    });
+    $("#exercises").empty()
+    $("#exercises").append(test)
+  })
+}
+
 const hijackFilterForm = () => {
   $('.filter').on('click', function(event) {
     const muscleGroup = $("#muscle_group").val();
@@ -118,7 +145,7 @@ const hijackFilterForm = () => {
 
 const hijackExerciseForm = () => {
   $('#new_exercise').submit(function(event) {
-    const values = $(this).serialize();
+    const values = $(this).serialize(); //jquery handles this serialization
     const posting = $.post('/exercises', values);
 
     event.preventDefault();
