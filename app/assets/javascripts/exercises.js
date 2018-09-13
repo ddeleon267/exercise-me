@@ -9,7 +9,7 @@ class Exercise {
 
   formatIndex() {
     const exerciseHtml = `
-      <div class="grab" data-name='${this.name}'>
+      <div class="exercise" data-name='${this.name}'>
         <ul><a href='/exercises/${this.id}' data-id='${this.id}' class='show_exercise'><h4>${this.name}</h4></a>
           <li> Primary Muscle Group: ${this.muscleGroup}</li>
           <li> Equipment Needed? ${this.equipmentNeeded ? 'Yes' : 'No'}</li>
@@ -55,7 +55,7 @@ const getExercises = (muscle = null) => {
       </select>
       <input type='submit' name='commit' value='Filter' class='filter' data-disable-with='Filter'>
     <form/>
-    <button id="alpha">Click Here to Alphabetize</button>
+    <button id="alphabetize">Click Here to Alphabetize</button>
     `
   fetch(`/exercises.json`)
   .then(response => response.json())
@@ -76,6 +76,23 @@ const getExercises = (muscle = null) => {
     } else {
         $('#app-container').append(`<h3>No Matching Exercises Were Found. Please try again!</h3>`)
     };
+  });
+};
+
+const hijackAlphabetizeButton = () => {
+  $(document).on('click', "#alphabetize", (event) => {
+    const exerciseDivs = $(".exercise");
+
+    const sortedExerciseDivs =
+      exerciseDivs.sort((a, b) => {
+        const nameA = a.dataset.name.toUpperCase();
+        const nameB = b.dataset.name.toUpperCase();
+
+        return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+      });
+
+    event.preventDefault();
+    $("#exercises").empty().append(sortedExerciseDivs);
   });
 };
 
@@ -111,28 +128,6 @@ const addExerciseShowListeners = () => {
     getExercise(id);
   });
 };
-
-const hijackAlphaButton = () => {
-  $(document).on('click', "#alpha", function(event) {
-    event.preventDefault()
-    alert("Boo!")
-    let divs = $(".grab")
-    let test = divs.sort(function(a, b) {
-      let nameA = a.dataset.name.toUpperCase(); // ignore upper and lowercase
-      var nameB = b.dataset.name.toUpperCase(); // ignore upper and lowercase
-      if (nameA < nameB) {
-        return -1;
-      }
-      if (nameA > nameB) {
-        return 1;
-      }
-      // names must be equal
-      return 0;
-    });
-    $("#exercises").empty()
-    $("#exercises").append(test)
-  })
-}
 
 const hijackFilterForm = () => {
   $('.filter').on('click', function(event) {

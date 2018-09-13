@@ -22,5 +22,5 @@ $(document).on('turbolinks:load', () => {
   addWorkoutShowListeners()
   hijackExerciseForm()
   hijackFilterForm()
-  hijackAlphaButton()
+  hijackAlphabetizeButton()
 })
