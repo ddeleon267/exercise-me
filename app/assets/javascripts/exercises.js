@@ -60,8 +60,7 @@ const getExercises = (muscle = null) => {
   fetch(`/exercises.json`)
   .then(response => response.json())
   .then(exercises => {
-    $('#app-container').empty().append(form, `<div id="exercises"></div>`);
-
+    const appContainer = $('#app-container').empty().append(form, `<div id="exercises"></div>`);
     const matches = muscle ? (exercises.filter(ex => ex.muscle_group === muscle)) : exercises;
     const exercisesDiv = $('#exercises');
 
@@ -72,7 +71,7 @@ const getExercises = (muscle = null) => {
         exercisesDiv.append(exerciseHTML);
       });
     } else {
-        $('#app-container').append(`<h3>No Matching Exercises Were Found. Please try again!</h3>`)
+        exercisesDiv.append(`<h3>No Matching Exercises Were Found. Please try again!</h3>`)
     };
   });
 };
@@ -139,7 +138,7 @@ const hijackExerciseForm = () => {
     const values = $(this).serialize(); //jquery handles this serialization
     const posting = $.post('/exercises', values);
     event.preventDefault();
-    
+
     posting.done(data => {
       const newExercise = new Exercise(data);
       $('#exerciseName').text(newExercise.name);

@@ -51,13 +51,13 @@ const getWorkouts = () => {
   fetch('/workouts.json')
   .then(response => response.json())
   .then(workouts => {
-    $('#app-container').empty();
-    $('#app-container').append(`<h1>Workouts</h1>`);
+    const appContainer = $('#app-container')
+    appContainer.empty().append(`<h1>Workouts</h1>`);
 
     workouts.forEach(workout => {
       const newWorkout = new Workout(workout);
       const workoutHtml = newWorkout.formatIndex();
-      $('#app-container').append(workoutHtml);
+      appContainer.append(workoutHtml);
     });
   });
 };
@@ -70,8 +70,7 @@ const getWorkout = (id) => {
    .then(workout => {
      const newWorkout = new Workout(workout);
      const workoutHtml = newWorkout.formatShow();
-     $('#app-container').empty();
-     $('#app-container').append(workoutHtml);
+     $('#app-container').empty().append(workoutHtml);
    });
 };
 
