@@ -60,18 +60,16 @@ const getExercises = (muscle = null) => {
   fetch(`/exercises.json`)
   .then(response => response.json())
   .then(exercises => {
-    $('#app-container').empty();
-    $('#app-container').append(form);
-    $('#app-container').append(`<div id="exercises"></div>`)
+    $('#app-container').empty().append(form, `<div id="exercises"></div>`);
 
-    let matches = muscle ? (exercises.filter(ex => ex.muscle_group === muscle)) : exercises;
-
+    const matches = muscle ? (exercises.filter(ex => ex.muscle_group === muscle)) : exercises;
+    const exercisesDiv = $('#exercises');
 
     if (matches.length > 0) {
       matches.forEach(exercise => {
-      const newExercise = new Exercise(exercise);
-      const exerciseHTML = newExercise.formatIndex();
-      $('#exercises').append(exerciseHTML);
+        const newExercise = new Exercise(exercise);
+        const exerciseHTML = newExercise.formatIndex();
+        exercisesDiv.append(exerciseHTML);
       });
     } else {
         $('#app-container').append(`<h3>No Matching Exercises Were Found. Please try again!</h3>`)
@@ -104,8 +102,7 @@ const getExercise = (id) => {
    .then(exercise => {
      const newExercise = new Exercise(exercise);
      const exerciseHTML = newExercise.formatShow();
-     $('#app-container').empty();
-     $('#app-container').append(exerciseHTML);
+     $('#app-container').empty().append(exerciseHTML);
    });
 };
 
@@ -132,7 +129,6 @@ const addExerciseShowListeners = () => {
 const hijackFilterForm = () => {
   $('.filter').on('click', function(event) {
     const muscleGroup = $("#muscle_group").val();
-
     event.preventDefault();
     getExercises(muscleGroup);
   });
@@ -142,8 +138,8 @@ const hijackExerciseForm = () => {
   $('#new_exercise').submit(function(event) {
     const values = $(this).serialize(); //jquery handles this serialization
     const posting = $.post('/exercises', values);
-
     event.preventDefault();
+    
     posting.done(data => {
       const newExercise = new Exercise(data);
       $('#exerciseName').text(newExercise.name);
